@@ -1,0 +1,42 @@
+<div class="  search-section">
+    <!-- <button class="search-button">
+      Ajouter un domaine d'activité 
+    </button> -->
+    <div class="search-input shadow">
+      <input type="text" placeholder="Recherche ici">
+      <i class="bx bx-search"></i>
+    </div>
+  </div>
+<div class="mt-4 text-center">
+  <h3 class="fw-bold">Liste des utilisateurs </h3>
+
+</div>
+
+
+<div class=" container table-responsive mt-5">
+  <table class="table">
+    <thead class=" ">
+      <tr class="">
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.email }}</td>
+        <td><button class="btn">Bloqué</button></td>
+      </tr>
+
+      <!-- <tr>
+        <td>Seydou</td>
+        <td>Diallo</td>
+        <td>seydoudiallo@gmail.com</td>
+        <td><button class="btn">Bloqué</button></td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,47 @@
+
+body{
+    background-color: #0a2640;
+    color: #fff;
+    padding: 107px;
+    text-align: center;
+    /* height: 9000%; */
+}
+
+.cadre {
+    margin-top: 205px;
+    background-color: white;
+    border-radius: 2%;
+    /* height: 100%; */
+
+
+  }
+  .cadre2 {
+    /* margin-top: 200px; */
+    background-color: white;
+    border-radius: 2%;
+
+
+  }
+  
+  .connexion {
+    margin: 10vh auto;
+    max-width: 71vh;
+  }
+  
+  .btn-connexion {
+    width: 100%;
+    color: white;
+    background-color: #0a2640;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .form-control{
+    padding: 2.5%;
+  }
+  
+  .inscription {
+    margin: 15%;
+
+  }
+

@@ -1,0 +1,179 @@
+.search-section {
+    display: flex;
+    align-items: center;
+    margin-left: 55px;
+    margin-right: 55px;
+    margin-top: -55px;
+
+  }
+  
+  .search-button {
+    padding: 8px 16px;
+    background-color: white;
+    color: #FFC107;
+    border: 2.3px solid #FFC107;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .search-button:hover {
+    background-color: #FFC107;
+    color: white;
+   
+  }
+  
+  
+  .search-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    margin-left: auto;
+  }
+  
+  .search-input input {
+    border: none;
+    outline: none;
+    padding: 4px;
+  }
+  
+  .search-input i {
+    margin-left: 8px;
+    color: #aaa;
+  }
+
+  .search-input .select-wrapper {
+    position: relative;
+  }
+  
+  .search-input .select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    outline: none;
+    width: 200px;
+    padding-right: 30px;
+  }
+  
+  .search-input .select-wrapper i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #767474;
+    
+  }
+  
+  /* Style personnalisé pour le bouton de sélection */
+  .search-input .select-wrapper i {
+    font-size: 27px;
+    font-weight: bold;
+  }
+  
+  /* Style personnalisé lorsque le menu déroulant est ouvert */
+  .search-input .select-wrapper select:focus {
+    border-color: #FFC107;
+  }
+  
+  /* Style personnalisé pour le bouton de recherche */
+  .search-input i.bx-search {
+    font-size: 16px;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 990px;
+    margin: 0 auto;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-description {
+    /* margin-bottom: 20px; */
+    flex-shrink: 0;
+
+    
+  }
+  
+ 
+  .card-description p {
+    justify-content: flex-start;
+    width: 50%;
+    color: #0A2640;
+    
+
+    /* margin: 0; */
+  }
+  
+  .card-buttons {
+    display: flex;
+    align-self: flex-end;
+    /* margin-bottom: 20px; */
+  }
+  
+  .card-button {
+    /* padding: 4px 8px; */
+    /* background-color: #FFC107; */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: -60px;
+    height: 1%;
+    font-size: 11px;
+  }
+  
+  .btn{
+    background-color: #FFC107;
+    padding: 2px 9px;
+  }
+  .btn1{
+    background-color: #741515;
+    padding: 2px 6px;
+  }
+  .card-details {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card-detail-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .card-detail-item i {
+    margin-right: 8px;
+    color: #0A2640;
+  }
+ 
+  
+  .card-detail-item span {
+    font-weight: bold;
+    font-size: 13px;
+    color:#0A2640;
+  }
+
+  .orange-color span {
+    color: #FFC107;
+  }
+  
+  .orange-color i {
+    fill: #FFC107;
+    color: #FFC107;
+  }

@@ -1,0 +1,118 @@
+<div class="  search-section ">
+  <button class="search-button" data-bs-toggle="modal" data-bs-target="#domaine">
+    Ajouter un domaine d'activité
+  </button>
+  <div class="search-input shadow">
+    <input type="text" placeholder="Recherche ici">
+    <i class="bx bx-search"></i>
+  </div>
+</div>
+<div class="mt-4 text-center">
+  <h3 class="fw-bold">Liste des domaines d'activités</h3>
+</div>
+
+<div class=" container table-responsive mt-5">
+  <table class="table">
+    <thead class=" ">
+      <tr class="">
+        <th>Image</th>
+        <th>Nom de domaine</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let domaine of listeDomaines">
+        <td> <img alt="Image du domaine" src="http://127.0.0.1:8000/pictures/field/{{ domaine.picture }}" /> </td>
+        <td>{{ domaine.fieldname }}</td>
+        <td>{{ domaine.description }}</td>
+        <td>
+          <button class="btn" (click)="openEditModal(domaine)" data-bs-toggle="modal"
+            data-bs-target="#updateDomaine">Modifier</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<!-- [src]="domaine.picture" -->
+
+<div class="modal fade" id="updateDomaine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="domaineActivite" (ngSubmit)="updateDomaine()" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier un Domaine d'activité</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="editedDomaine.fieldname"
+              [ngModelOptions]="{standalone: true}" placeholder="fieldname forum">
+            <label for="floatingInput">Nom domaine</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+              [ngModelOptions]="{standalone: true}" style="height: 100px"
+              [(ngModel)]="editedDomaine.description"></textarea>
+            <label for="floatingTextarea2">Description</label>
+          </div>
+          <div class="form-floating">
+            <img src="http://127.0.0.1:8000/pictures/field/{{ editedDomaine.picture }}" height="100" alt="">
+          </div>
+          <div class="input-group mt-4">
+            <input type="file" class="form-control" id="inputGroupFile02" (change)="getFile($event)" accept="image/*"
+              formControlName="picture">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="domaine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un Domaine d'activité</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" [formGroup]="domaineActivite" (ngSubmit)="ajoutDomaine()" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" formControlName="fieldname"
+              placeholder="fieldname forum">
+            <label for="floatingInput">Nom domaine</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+              style="height: 100px" formControlName="description"></textarea>
+            <label for="floatingTextarea2">Description</label>
+          </div>
+
+
+          <div class="input-group mt-4">
+            <input type="file" class="form-control" id="inputGroupFile02" (change)="getFile($event)" accept="image/*"
+              formControlName="picture">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

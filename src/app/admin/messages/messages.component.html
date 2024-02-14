@@ -1,0 +1,198 @@
+    <div class="home-content">
+
+      <div class="mt-3">
+        <!-- <i class="fa-solid fa-arrow-left fs-3 fw-bold w-50 p-4" routerLink="/forumSujet" style="color: #0a2640; cursor:pointer;"></i> -->
+
+        <div class="card mt-1">
+          <div class="card-content d-flex justify-content-between">
+            <div class="card-description">
+              <p class="fs-4 w-75">{{ content }}</p>
+            </div>
+            <div class="card-buttons">
+              <button class="action-button btn" data-bs-toggle="modal"
+          data-bs-target="#message">Envoyer un Message</button>
+            </div>
+            <div class="card-details">
+              <div class="card-detail-item">
+                <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+                <span class="fs-6">Domaine: {{ domain_name }} </span>
+              </div>
+              <div class="card-detail-item orange-color">
+                <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+                <span class="fs-6">publié le {{ date }} </span>
+              </div>
+              <div class="card-detail-item">
+                <!-- <i class="fa-solid fa-message" style="color: #0A2640;"></i> -->
+                <i class="fa-regular fa-message" style="color: #0A2640;"></i>
+                <span class="fs-6"> {{ messages.length }}</span>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+<!-- formeeeeee pour message -->
+
+        <section class="messagetop">
+          <div class="container ">
+            <div class="row">
+              <div class="col-12 pb-4" *ngFor="let message of messages">
+                <div class="comment mt-4 text-justify float-left">
+                  <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40"
+                    height="40">&nbsp;&nbsp;
+                  <h5 class="">Jhon Doe</h5>
+                  <span class="fw-bold"> &nbsp; {{ message.updated_at }}</span>
+                  <br>
+                  <p class="withText w-100 fs-6">{{ message.message_content }}</p>
+                  <div class="container withText">
+                    <div class="icons">
+                      <i class="fa-regular fa-thumbs-down" style="color: #0a2640;"></i>
+                      <i class="fa-regular fa-thumbs-up" style="color: #0a2640;"></i>
+                    </div>
+                    <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#message" class="reply-link fs-6 fw-bold" style="color: #0a2640;">Répondre</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+
+<!-- Modal pour ajout messsage -->
+  <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un message</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="messageForm" (ngSubmit)="ajoutMessage()">
+          <div class="modal-body">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Veuillez laisser votre message" id="floatingTextarea2"
+                style="height: 100px" formControlName="message_content"></textarea>
+              <label for="floatingTextarea2">Message</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="search-section">
+    
+    <div class="search-input shadow">
+      <div class="select-wrapper">
+        <select id="select-option">
+          <option value="">Filtrer par sujet</option>
+          <option value="option1">Elevage</option>
+          <option value="option2">Santé</option>
+          <option value="option3">Informatique</option>
+        </select>
+        <i class="bx bx-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="card mt-5">
+    <div class="card-content d-flex justify-content-between">
+      <div class="card-description">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis laborum  sit illum omnis iusto molestiae?</p>
+      </div>
+      <div class="card-buttons">
+        <button class="card-button btn1">Supprimer</button>
+        <button class="card-button btn">Voir plus </button>
+        
+      </div>
+      <div class="card-details">
+        <div class="card-detail-item">
+          <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+          <span>Domaine Elevage </span>
+        </div>
+        <div class="card-detail-item orange-color">
+            <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+            <span>publié le 06/12/2023 </span>
+          </div>
+          <div class="card-detail-item">
+          <i class="fa-solid fa-message" style="color: #0A2640;"></i>
+          <span>Nombre de messages</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <section class="messagetop">
+    <div class="container ">
+        <div class="row">
+            <div class="col-12 pb-4">
+              <div class="comment mt-4 text-justify float-left">
+                <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">&nbsp;&nbsp;
+                <h5>Jhon Doe</h5>
+                <span class="fw-bold" > &nbsp; le 20 October, 2023 à 19h</span>
+                <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                     <button class="card-button btn1">Supprimer</button>
+                     
+                    </div>
+                  </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 pb-4">
+                <div class="comment mt-4 text-justify float-left">
+                    <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">&nbsp;&nbsp;
+                    <h5>Jhon Doe</h5>
+                    <span class="fw-bold" > &nbsp; le 20 October, 2023 à 19h</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                    <button class="card-button btn1">Supprimer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+ <!-- <button class="card-button btn"  routerLink="/forumMessage/{{ sujet.id }}">Voir plus </button> -->
+
+
+                 

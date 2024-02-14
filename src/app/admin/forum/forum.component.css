@@ -1,0 +1,107 @@
+.form-select{
+  margin-top: 3vh;
+}
+
+
+.search-section {
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-top: -55px;
+
+  }
+  
+  .search-button {
+    padding: 8px 16px;
+    background-color: white;
+    color: #FFC107;
+    border: 2.3px solid #FFC107;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .search-button:hover {
+    background-color: #FFC107;
+    color: white;
+   
+  }
+  
+  
+  .search-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    margin-left: auto;
+  }
+  
+  .search-input input {
+    border: none;
+    outline: none;
+    padding: 4px;
+  }
+  
+  .search-input i {
+    margin-left: 8px;
+    color: #aaa;
+  }
+
+  .table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  .table th,
+  .table td {
+    width: auto;
+    text-align: center; 
+    padding: 10px; 
+  }
+
+
+
+
+
+  .table thead th {
+    background-color: #0A2640;
+    color: white;
+    width: 100%;
+  }
+
+  .btn{
+    background-color: #FFC107;
+    color: white;
+    padding: 6px 12px;
+    font-weight: bold;
+  }
+  .btn1{
+    background-color: #741515;
+    color: white;
+    padding: 4px 8px;
+    font-weight: bold;
+  }
+  .table tbody tr td img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+
+  .table tbody tr td {
+    background-color: #dfe2e4;
+    color: black;
+    font-weight: bold;
+    vertical-align: middle;
+
+  }
+
+  .table tbody tr td:nth-child(3) {
+    overflow-wrap: anywhere;
+    max-width: 150px;
+  }
+
+  .table tbody tr {
+    border-bottom: 7px solid white; 
+  }

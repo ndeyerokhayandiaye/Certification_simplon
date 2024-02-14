@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class=""></i>
+          <span  class="logo_name ">pënc</span>
+        </div>
+        <div><h4 class="titreDomaine text-white text-center mt-4">DOMAINES</h4></div>
+        <ul class="nav-links" >
+          <li  *ngFor="let domaine of listeDomaines">
+            <a href="forumSujetSpecific/{{ domaine.id }}"  class="active links_name"  routerLinkActive="activeMenu">
+              <i class="bx bx-grid-alt"></i>
+              <span class="menuItem" routerLinkActive="activeMenu" class="links_name"> {{ domaine.fieldname }} </span>
+              <!-- <span class="menuItem"  class="links_name"> {{ domaine.id }} </span> -->
+            </a>
+          </li>
+
+
+          <li class="log_out">
+            <a (click)=" logout() ">
+              <i class="bx bx-log-out"></i>
+              <span class="menuItem" routerLinkActive="activeMenu" routerLink="accueil"  class="links_name">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <section class="home-section">
+
+        <nav class="nav-admin shadow d-flex" style="padding-right: 22px;">
+          <div class="flex-grow-1"></div>
+          <div class="icon-notification fs-4 text-end fw-bold" style="margin-right: 11px;">
+            <i class="fa-regular fa-bell" style="color: #0a2640;"></i>
+          </div>
+          <div class="icon-profile fs-4 text-end fw-bold">
+            <img src="https://i.imgur.com/yTFUilP.jpg" routerLink="/profilUser" alt="" class="rounded-circle" width="40" height="40">
+
+          </div>
+        </nav>
+
+    <div class="home-content">
+
+      <div class="mt-4">
+
+        <i class="fa-solid fa-arrow-left fs-3 fw-bold w-50 p-4" routerLink="/forumSujet" style="color: #0a2640;cursor:pointer;"></i>
+
+        <div class="search-section">
+            <div class="mt-3">
+                <h2>DOMAINE {{ domain_name }} / <span class="span_forum">FORUM</span> </h2>
+                </div>
+
+                <div class="search-input shadow">
+                  <div class="select-wrapper">
+                    <select id="select-option">
+                      <option value="">Filtrer sujet par date</option>
+                      <option value="option1">Elevage</option>
+                      <option value="option2">Santé</option>
+                      <option value="option3">Informatique</option>
+                    </select>
+                    <i class="bx bx-chevron-down"></i>
+                  </div>
+                  <!-- <i class="bx bx-search"></i> -->
+                </div>
+
+            <!-- <div class="search-input shadow">
+              <div class="select-wrapper">
+                <select id="select-option" >
+                  <option value="">Choisir un forum</option>
+                  <option *ngFor="let forum of forums" [value]="forum.id">{{ forum.forumname }}</option>
+                </select>
+                <i class="bx bx-chevron-down"></i>
+              </div>
+            </div> -->
+
+          </div>
+          <!-- after first section -->
+          <div><p class="para-description fs-5  ">{{ domain_description }}</p></div>
+
+          <button class="search-button"  data-bs-toggle="modal" data-bs-target="#addsujet">
+            Créer un sujet
+          </button>
+
+
+          <div class="card mt-4" *ngFor="let sujet of listSujets">
+            <div class="card-content d-flex justify-content-between">
+              <div class="card-description">
+                <p class="fs-4 w-75" >{{ sujet.content }}</p>
+              </div>
+              <div class="card-buttons mt-4">
+                <button class="card-button btn1">Masquer</button>
+                <button class="card-button btn"  routerLink="/forumMessage/{{ sujet.id }}">Voir plus </button>
+              </div>
+              <div class="card-details">
+                <div class="card-detail-item">
+                    <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+                  <span class="fs-6">Domaine: {{ sujet.forum.forumname }} </span>
+                </div>
+                <div class="card-detail-item orange-color">
+                    <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+                    <span class="fs-6">publié le {{ sujet.created_at }} </span>
+                  </div>
+                <div class="card-detail-item">
+                  <!-- <i class="fa-solid fa-message" style="color: #0A2640;"></i> -->
+                  <i class="fa-regular fa-message fw-medium" style="color: #0A2640;"></i>
+
+                  <span class="fs-6">{{ sujet.message_received }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- <div class="home-content">
+          </div> -->
+      </div>
+
+        </div>
+      </section>
+
+      <div class="modal fade" id="addsujet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter de Sujet</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" [formGroup]="sujet" (ngSubmit)="ajoutSujet()">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="content"
+                    placeholder="Contenu">
+                  <label for="floatingInput">Contenu</label>
+                </div>
+
+                  <select class="form-select" formControlName="forum_id">
+                    <option *ngFor="let forum of forums" [value]="forum.id">{{ forum.forumname }}</option>
+                  </select>
+
+             
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+     
+
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      };
+    </script>
+
+  </body>
+</html>
+
+

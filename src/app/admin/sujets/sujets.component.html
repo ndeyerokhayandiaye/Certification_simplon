@@ -1,0 +1,83 @@
+<div class="search-section">
+  <button class="search-button" data-bs-toggle="modal" data-bs-target="#addSujet">
+    Créer un sujet
+  </button>
+  <div class="search-input shadow">
+    <div class="select-wrapper">
+      
+      <select id="select-option">
+        <option hidden>Choisir un domaine</option>
+        <option *ngFor="let forum of listforums" [value]="forum.id">{{ forum.forumname }}</option>
+      </select>
+
+      <!-- <select (change)="onDomaineSelected($event.target.value)">
+        <option value="">Sélectionnez un domaine</option>
+        <option *ngFor="let domaine of listeDomaines" [value]="domaine.id">
+          {{ domaine.fieldname }}
+        </option>
+      </select> -->
+      <i class="bx bx-chevron-down"></i>
+    </div>
+    <!-- <i class="bx bx-search"></i> -->
+  </div>
+</div>
+
+
+<div class="card mt-5" *ngFor="let sujet of listSujets">
+  <div class="card-content d-flex justify-content-between">
+    <div class="card-description">
+      <p class="fs-5 w-75">{{ sujet.content }}</p>
+    </div>
+    <div class="card-buttons mt-4">
+      <button class="card-button btn1" (click)="deleteSujet(sujet.id)">Supprimer</button>
+      <!-- <button class="card-button btn"  routerLink="/messages">Voir plus </button> -->
+      <button class="card-button btn"  routerLink="/messages/{{ sujet.id }}">Voir plus </button>
+      <!-- <button class="card-button btn"  routerLink="/forumMessage/{{ sujet.id }}">Voir plus </button> -->
+    </div>
+    <div class="card-details">
+      <div class="card-detail-item">
+        <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+        <span>{{ sujet.forum.forumname }}</span>
+      </div>
+      <div class="card-detail-item orange-color">
+        <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+        <span>publié le {{ sujet.created_at }} </span>
+      </div>
+      <div class="card-detail-item">
+        <i class="fa-solid fa-message" style="color: #0A2640;"></i>
+        <span>{{ sujet.message_received }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addSujet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter de Sujet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" [formGroup]="sujet" (ngSubmit)="ajoutSujet()">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" formControlName="content"
+              placeholder="Contenu">
+            <label for="floatingInput">Contenu</label>
+          </div>
+
+          <div >
+            <select class="form-select" formControlName="forum_id">
+              <option hidden>Choisissez un domaine</option>
+              <option *ngFor="let forum of listforums" [value]="forum.id">{{ forum.forumname }}</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

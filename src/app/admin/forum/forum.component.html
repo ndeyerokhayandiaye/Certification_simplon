@@ -1,0 +1,105 @@
+<div class="  search-section ">
+  <button class="search-button" data-bs-toggle="modal" data-bs-target="#forum">
+    Ajouter un forum
+  </button>
+
+  <!-- partiee select -->
+
+</div>
+<div class="mt-4 text-center">
+  <h3 class="fw-bold">Liste forum</h3>
+
+</div>
+<div class="container table-responsive mt-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>forum</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let forum of forums">
+        <td>{{ forum.forumname }}</td>
+        <td>{{ forum.description }}</td>
+        <td>
+          <button class="action-button btn1" (click)="deleteForum(forum.id)">Supprimer</button> &nbsp;
+          <button class="action-button btn" (click)="openEditModal(forum)" data-bs-toggle="modal"
+          data-bs-target="#updateForum">Modifier</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="modal fade" id="forum" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un forum</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="forum" (ngSubmit)="ajoutForum()">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" name="forumname" class="form-control" formControlName="forumname"
+              placeholder="Nom du forum">
+            <label for="forumname">Nom du forum</label>
+          </div>
+          <div class="form-floating">
+            <textarea type="text" name="description" class="form-control" formControlName="description"
+              placeholder="Description"></textarea>
+            <label for="description">Description</label>
+          </div>
+          <select class="form-select" formControlName="field_id" aria-label="Default select example">
+            <option hidden>Choisissez un domaine</option>
+            <option *ngFor="let domaine of listeDomaines" [value]="domaine.id">{{ domaine.fieldname }}</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="updateForum" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du forum</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="forum" (ngSubmit)="ajoutForum()">
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" name="forumname" class="form-control" [(ngModel)]="newForum.forumname"
+              placeholder="Nom du forum">
+            <label for="forumname">Nom du forum</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" name="description" class="form-control" [(ngModel)]="newForum.description"
+              placeholder="Description">
+            <label for="description">Description</label>
+          </div>
+          <div class="form-floating">
+            <select class="form-select  select_optionn" aria-label="Default select example"  [(ngModel)]="newForum.field_id">
+              <option selected hidden>Choisissez un domaine</option>              
+              <option *ngFor="let domaine of listeDomaines" [value]="domaine.id">{{ domaine.fieldname }}</option>
+            </select>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Modifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

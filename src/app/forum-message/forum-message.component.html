@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Boxicons CDN Link -->
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class=""></i>
+      <span routerLink="statistique" class="logo_name ">pënc</span>
+    </div>
+    <div>
+      <h4 class="titreDomaine text-white text-center mt-4">Domaines</h4>
+    </div>
+    <ul class="nav-links">
+      <!--  <li>
+            <a  class="active">
+              <i class="bx bx-grid-alt"></i>
+              <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique"  class="links_name"> Elevage </span>
+            </a>
+          </li> -->
+      <li *ngFor="let domaine of listeDomaines">
+        <a href="forumSujetSpecific/{{ domaine.id }}" class="active">
+          <i class="bx bx-grid-alt"></i>
+          <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique" class="links_name"> {{
+            domaine.fieldname }} </span>
+          <!-- <span class="menuItem"  class="links_name"> {{ domaine.id }} </span> -->
+        </a>
+      </li>
+      <li class="log_out">
+        <a (click)=" logout() ">
+          <i class="bx bx-log-out"></i>
+          <span class="menuItem" routerLinkActive="activeMenu" routerLink="accueil" class="links_name">Log out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section">
+
+    <nav class="nav-admin shadow d-flex" style="padding-right: 22px;">
+      <div class="flex-grow-1"></div>
+      <div class="icon-notification fs-4 text-end fw-bold" style="margin-right: 11px;">
+        <i class="fa-regular fa-bell" style="color: #0a2640;"></i>
+      </div>
+      <div class="icon-profile fs-4 text-end fw-bold" routerLink="/profilUser">
+        <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+
+      </div>
+    </nav>
+
+    <div class="home-content">
+
+      <div class="mt-3">
+        <i class="fa-solid fa-arrow-left fs-3 fw-bold w-50 p-4" routerLink="/forumSujet" style="color: #0a2640; cursor:pointer;"></i>
+
+        <div class="card mt-1">
+          <div class="card-content d-flex justify-content-between">
+            <div class="card-description">
+              <p class="fs-4 w-75">{{ content }}</p>
+            </div>
+            <div class="card-buttons">
+              <button class="action-button btn" data-bs-toggle="modal"
+          data-bs-target="#message">Envoyer un Message</button>
+            </div>
+            <div class="card-details">
+              <div class="card-detail-item">
+                <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+                <span class="fs-6">Domaine: {{ domain_name }} </span>
+              </div>
+              <div class="card-detail-item orange-color">
+                <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+                <span class="fs-6">publié le {{ date }} </span>
+              </div>
+              <div class="card-detail-item">
+                <!-- <i class="fa-solid fa-message" style="color: #0A2640;"></i> -->
+                <i class="fa-regular fa-message" style="color: #0A2640;"></i>
+                <span class="fs-6"> {{ messages.length }}</span>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+<!-- formeeeeee pour message -->
+
+        <section class="messagetop">
+          <div class="container ">
+            <div class="row">
+              <div class="col-12 pb-4" *ngFor="let message of messages">
+                <div class="comment mt-4 text-justify float-left">
+                  <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40"
+                    height="40">&nbsp;&nbsp;
+                  <h5 class="">Jhon Doe</h5>
+                  <span class="fw-bold"> &nbsp; {{ message.updated_at }}</span>
+                  <br>
+                  <p class="withText w-100 fs-6">{{ message.message_content }}</p>
+                  <div class="container withText">
+                    <div class="icons">
+                      <i class="fa-regular fa-thumbs-down" style="color: #0a2640;"></i>
+                      <i class="fa-regular fa-thumbs-up" style="color: #0a2640;"></i>
+                    </div>
+                    <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#reponse" class="reply-link fs-6 fw-bold" style="color: #0a2640;">Répondre</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+       
+
+
+      </div>
+    </div>
+</section>
+
+<!-- Modal pour ajout messsage -->
+  <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un message</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="messageForm" (ngSubmit)="ajoutMessage()">
+          <div class="modal-body">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Veuillez laisser votre message" id="floatingTextarea2"
+                style="height: 100px" formControlName="message_content"></textarea>
+              <label for="floatingTextarea2">Message</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+ <!-- Section pour afficher les réponses -->
+ <section class="messagetop reponse_top">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 pb-4" *ngFor="let reponse of reponses">
+        <div class="comment mt-4 text-justify float-left" style="margin-left: 60px;">
+          <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">&nbsp;&nbsp;
+          <h5 class="">Jhon Doe</h5>
+          <span class="fw-bold"> &nbsp; {{ reponse.updated_at }}</span>
+          <br>
+          <p class="withText w-100 fs-6">{{ reponse.reply_content }}</p>
+          <div class="container withText">
+            <div class="icons">
+              <i class="fa-regular fa-thumbs-down" style="color: #0a2640;"></i>
+              <i class="fa-regular fa-thumbs-up" style="color: #0a2640;"></i>
+            </div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#reponse" class="reply-link fs-6 fw-bold" style="color: #0a2640;">Répondre</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<!-- Modal pour ajouter une réponse -->
+<div class="modal fade" id="reponse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter une réponse</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="reponseForm" (ngSubmit)="ajoutReponse()">
+        <div class="modal-body">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Veuillez laisser votre réponse" id="floatingTextarea2" style="height: 100px" formControlName="reply_content"></textarea>
+            <label for="floatingTextarea2">Réponse</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Envoyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".sidebarBtn");
+  sidebarBtn.onclick = function () {
+    sidebar.classList.toggle("active");
+    if (sidebar.classList.contains("active")) {
+      sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+    } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  };
+</script>
+</body>
+
+</html>
