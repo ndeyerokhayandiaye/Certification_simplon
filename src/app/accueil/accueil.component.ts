@@ -20,7 +20,7 @@ export class AccueilComponent implements OnInit {
     // })
   }
 
-  listeDomaines: DomaineActivite[];
+  listeDomaines: DomaineActivite[] = [];
   selectedDomaine: DomaineActivite;
 
   domaineActivite: FormGroup;
@@ -36,10 +36,14 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit(): void {
     const script = document.createElement('script');
-    script.src = '../../../assets/js/main.js'; // Ajustez le chemin en conséquence
+    script.src = '../../../assets/js/main.js';
     document.body.appendChild(script);
 
-    this.userConnect = JSON.parse(localStorage.getItem("userConnect") || "");
+    if(!localStorage.getItem("userConnect")){
+      localStorage.setItem('userConnect', JSON.stringify(""));
+    }
+
+    // this.userConnect = JSON.parse(localStorage.getItem("userConnect") || "");
     //console.log(this.userConnect.authorization.token)
     this.listerDomaine();
   }
@@ -56,6 +60,7 @@ export class AccueilComponent implements OnInit {
     this.domaineService.listerDomaine().subscribe(
       (domaines: DomaineActivite[]) => {
         this.listeDomaines = domaines;
+        console.log(this.listeDomaines);
       },
       (error) => {
         console.log(error);

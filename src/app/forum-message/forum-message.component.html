@@ -25,7 +25,7 @@
             </a>
           </li> -->
       <li *ngFor="let domaine of listeDomaines">
-        <a href="forumSujetSpecific/{{ domaine.id }}" class="active">
+        <a href="forumSujetSpecific/{{ domaine.id }}" class="active"  >
           <i class="bx bx-grid-alt"></i>
           <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique" class="links_name"> {{
             domaine.fieldname }} </span>

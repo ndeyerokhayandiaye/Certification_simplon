@@ -87,6 +87,20 @@ forum_id: number;
     });
   }
 
+  listSujetByDomain(id: number): any {
+    this.forumSujetService.getSujetByDomain(id).subscribe(
+      (sujets: any) => {
+        this.listSujets = sujets.sujet;
+        this.domain_name = sujets.domain.fieldname;
+        this.domain_description = sujets.domain.description;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
   listSujet(): void {
     this.forumSujetService.getAllSujets().subscribe(
       (sujets: Sujet[]) => {
@@ -150,19 +164,7 @@ forum_id: number;
   }
 
 
-  listSujetByDomain(id: number): any {
-    this.forumSujetService.getSujetByDomain(id).subscribe(
-      (sujets: any) => {
-        this.listSujets = sujets.sujet;
-        this.domain_name = sujets.domain.fieldname;
-        this.domain_description = sujets.domain.description;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
+  
 
   logout() {
     this.loginService.logout().subscribe(

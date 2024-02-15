@@ -137,7 +137,8 @@ logout() {
     this.domaineService.listerDomaine().subscribe(
       (domaines: DomaineActivite[]) => {
 
-        console.log(domaines)
+        console.log("la liste de tout les domaines",domaines)
+        // console.log(domaines)
         this.listeDomaines = domaines;
       },
       (error) => {

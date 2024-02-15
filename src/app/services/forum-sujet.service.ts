@@ -28,6 +28,10 @@ export class ForumSujetService {
     return this.http.get<Sujet>(`${baseUrl}/displaytopicbydomain/${id}`);
   }
 
+  // getSujetByDomain(id: number): Observable<Sujet> {
+  //   return this.http.get<Sujet>(`${baseUrl}/displayspecifictopic/${id}`);
+  // }
+ 
   createSujet(data: any){
     return this.http.post(`${baseUrl}/addtopic`, data);
   }

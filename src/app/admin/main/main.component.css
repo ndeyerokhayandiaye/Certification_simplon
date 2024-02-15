@@ -2,3 +2,10 @@
     margin-top: -5vh;
     background-color: transparent !important;
 }
+
+.home-section{
+    background-color: white !important;
+}
+.home-content{
+    height: 100vh !important;
+}

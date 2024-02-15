@@ -5,6 +5,52 @@
     grid-template-columns: 30% 30% 30%;
 }
 
+@media screen and (max-width: 768px) {
+  .all{
+    display: grid;
+    grid-template-columns: 90%  ;
+    gap: 10px;
+}
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .all {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+  }
+}
+
+
+@media screen and (max-width: 990px) {
+  /* .sectionFlex{
+    display: flex;
+    flex-direction: column;
+} */
+
+.search-box {
+display: none;
+}
+
+}
+
+
+@media screen and (max-width: 990px) {
+.callToAction{
+    display: none;
+}
+
+}
+
+/* @media screen and (max-width: 990px) {
+  .custom-heading{
+      margin-bottom: -10vh;
+  }
+  
+  } */
+
+
+
 .btn_pagination{
   color: #0A2640;
   font-size: 18px;

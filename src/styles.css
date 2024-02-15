@@ -60,11 +60,14 @@
 
 .sidebar .nav-links{
   margin-top: 10px;
+  /* border: 1px solid blue; */
+  padding: 0px;
 }
 .sidebar .nav-links li{
   position: relative;
   list-style: none;
   height: 50px;
+  /* border: 1px solid red; */
 }
 .sidebar .nav-links li a{
   height: 100%;

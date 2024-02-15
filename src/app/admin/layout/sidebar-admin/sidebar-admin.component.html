@@ -6,7 +6,7 @@
     <ul class="nav-links">
       <li>
         <a  class="active">
-          <i class="bx bx-grid-alt"  style="cursor: pointer;"></i>
+          <i class="bx bx-grid-alt "  style="cursor: pointer;"></i>
           <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique"  class="links_name" style="cursor: pointer;"> Statistique </span>
         </a>
       </li>
@@ -62,3 +62,15 @@
       </li>
     </ul>
   </div>
+
+
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    };
+  </script>
