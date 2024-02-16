@@ -15,11 +15,11 @@
       <span  class="logo_name ">pënc</span>
     </div>
     <div>
-      <h4 class="titreDomaine text-white text-center mt-4">DOMAINES</h4>
+      <h4 class="titreDomaine text-white px-4 mt-4">DOMAINES</h4>
     </div>
     <ul class="nav-links">
       <li *ngFor="let domaine of listeDomaines"  [routerLinkActive]="['activeMenu']">
-        <a class="fw-bold fs-4 active " routerLinkActive="activeMenu" href="forumSujetSpecific/{{ domaine.id }}" >
+        <a class="fw-bold fs-4 active "[routerLink]="['/forumSujetSpecific', domaine.id]" href="forumSujetSpecific/{{ domaine.id }}" >
           <i class="bx bx-grid-alt"></i>
           <span  class="active links_name"  > {{
             domaine.fieldname }} </span>
@@ -33,7 +33,7 @@
       <li class="log_out">
         <a (click)=" logout() ">
           <i class="bx bx-log-out"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="accueil" class="links_name">Log out</span>
+          <span class="menuItem" [routerLinkActive]="['activeMenu']" routerLink="accueil" class="links_name">Log out</span>
         </a>
       </li>
     </ul>

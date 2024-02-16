@@ -2,9 +2,9 @@
     margin-top: -10vh;
   }
 
-  .activeMenu{
+  .activeMenu {
     background-color: #FFC107;
-    color: white !important;
+    color: #fff;
   }
 
   .search-section {

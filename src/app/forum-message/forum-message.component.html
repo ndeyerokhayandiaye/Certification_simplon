@@ -25,7 +25,7 @@
             </a>
           </li> -->
       <li *ngFor="let domaine of listeDomaines">
-        <a href="forumSujetSpecific/{{ domaine.id }}" class="active"  >
+        <a href="forumSujetSpecific/{{ domaine.id }}" class="active">
           <i class="bx bx-grid-alt"></i>
           <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique" class="links_name"> {{
             domaine.fieldname }} </span>
@@ -112,9 +112,26 @@
             </div>
           </div>
         </section>
-       
-
-
+        <div class="container">
+          <div class="row">
+            <div class="col-12 pb-4" *ngFor="let reponse of reponses">
+              <div class="comment mt-4 text-justify float-left" style="margin-left: 60px;">
+                <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">&nbsp;&nbsp;
+                <h5 class="">Jhon Doe</h5>
+                <span class="fw-bold"> &nbsp; {{ reponse.updated_at }}</span>
+                <br>
+                <p class="withText w-100 fs-6">{{ reponse.reply_content }}</p>
+                <div class="container withText">
+                  <div class="icons">
+                    <i class="fa-regular fa-thumbs-down" style="color: #0a2640;"></i>
+                    <i class="fa-regular fa-thumbs-up" style="color: #0a2640;"></i>
+                  </div>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#reponse" class="reply-link fs-6 fw-bold" style="color: #0a2640;">Répondre</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 </section>
@@ -147,29 +164,7 @@
 
 
  <!-- Section pour afficher les réponses -->
- <section class="messagetop reponse_top">
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12 pb-4" *ngFor="let reponse of reponses">
-        <div class="comment mt-4 text-justify float-left" style="margin-left: 60px;">
-          <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">&nbsp;&nbsp;
-          <h5 class="">Jhon Doe</h5>
-          <span class="fw-bold"> &nbsp; {{ reponse.updated_at }}</span>
-          <br>
-          <p class="withText w-100 fs-6">{{ reponse.reply_content }}</p>
-          <div class="container withText">
-            <div class="icons">
-              <i class="fa-regular fa-thumbs-down" style="color: #0a2640;"></i>
-              <i class="fa-regular fa-thumbs-up" style="color: #0a2640;"></i>
-            </div>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#reponse" class="reply-link fs-6 fw-bold" style="color: #0a2640;">Répondre</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <section class="messagetop">
   
 </section>
 
