@@ -16,20 +16,14 @@ const routes: Routes = [
   { path: 'login', component: AuthentificationComponent },
   { path: 'conditionUtilisation', component: ConditiondutilisationComponent },
   { path: 'politique', component: PolitiqueComponent },
-  
   { path: 'forumSujet', component: ForumSujetComponent, canActivate:[allguardsGuard] },
   { path: 'profilUser', component: ProfilUserComponent, canActivate:[allguardsGuard] },
   { path: 'forumMessage/:id', component: ForumMessageComponent, canActivate:[allguardsGuard]},
   { path: 'forumSujetSpecific/:id', component: ForumSujetSpecificComponent , canActivate:[allguardsGuard] },
 
-
-
       // partie admin
-
-  { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule)},
+  { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule), canActivate:[allguardsGuard] },
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

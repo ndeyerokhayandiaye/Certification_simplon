@@ -16,7 +16,6 @@ serviceLoginService: any;
   constructor(private loginService: ServiceLoginService,
     private route: Router) { }
 
-
   confirmerpassword: any;
   defaultPassword: string = "passer";
   tabUtilisateurs: any;
@@ -41,7 +40,6 @@ serviceLoginService: any;
       localStorage.setItem('userConnect', JSON.stringify(""));
     }
   }
-
 
 
 login(){
@@ -76,40 +74,48 @@ login(){
 })
   }}
 
-
-
   register() {
-    this.loginService.register(this.prenom, this.nom, this.emailCon, this.passwordCon, this.confirmerpassword).subscribe(
-      response => {
-        console.log('Inscription réussie', response);
-        // Sauvegarde des informations de connexion dans le localStorage
-        localStorage.setItem('email', this.emailCon);
-        localStorage.setItem('isLoggedIn', 'true');
-        // Affiche une alerte de réussite
-        Swal.fire({
-          icon: 'success',
-          title: 'Inscription réussie',
-          text: 'Votre inscription a été effectuée avec succès.',
-          confirmButtonText: 'OK'
-        }).then(() => {
-          // Redirection vers la page d'accueil
-          this.router.navigate(['/accueil']);
-        });
-      },
-      error => {
-        console.error('Erreur lors de l inscription', error);
-        // Affiche une alerte d'erreur
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur lors de l\'inscription',
-          text: 'Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer.',
-          confirmButtonText: 'OK'
-        });
-      }
-    );
+     // Perform frontend validations
+  if (this.nom === '' || this.prenom === '' || this.emailCon === '' || this.passwordCon === '' || this.confirmerpassword === '') {
+    this.verifierChamps('Champs vides', 'Veuillez remplir tous les champs', 'warning');
+    return; 
   }
 
+  if (this.passwordCon !== this.confirmerpassword) {
+    this.verifierChamps('Erreur', 'Les mots de passe ne correspondent pas', 'error');
+    return; 
+  }
 
+  this.loginService.register(this.prenom, this.nom, this.emailCon, this.passwordCon, this.confirmerpassword).subscribe(
+    response => {
+      console.log('Inscription effectuer avec success👏🏽', response);
+      // Sauvegarde des informations de connexion dans le localStorage
+      localStorage.setItem('email', this.emailCon);
+      localStorage.setItem('isLoggedIn', 'true');
+      // Affiche une alerte de réussite
+      Swal.fire({
+        icon: 'success',
+        title: 'Inscription réussie',
+        text: 'Inscription effectuer avec success👏🏽',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        // Redirection vers la page d'accueil
+        this.router.navigate(['/accueil']);
+      });
+    },
+    error => {
+      console.error('Erreur lors de l inscription', error);
+      // Affiche une alerte d'erreur
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur lors de l\'inscription',
+        text: 'Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer.',
+        confirmButtonText: 'OK',
+
+      });
+    }
+  );
+  }
 
   private handleError(error: any): void {
     if (error && error.message) {
@@ -153,7 +159,9 @@ login(){
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
+      timer: 1500
+
     });
   }
 
@@ -180,8 +188,6 @@ login(){
       }
     }
   }
-
-
 
   showForm() {
     this.changeForm = !this.changeForm;

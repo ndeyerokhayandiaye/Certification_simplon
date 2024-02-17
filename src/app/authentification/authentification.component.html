@@ -29,29 +29,32 @@
         <div class="container cadre2 shadow py-3 col-6" >
           <h1 class="text-center fw-bold mb-5 mt-5" style="color: #0a2640;">Création de compte</h1>
           <div class="form-group mb-4">
-            <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom" placeholder="Nom">
+            <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom" placeholder="Nom" required maxlength="255">
           </div>
       
           <div class="form-group mb-4">
-            <input type="text" name="prenom" id="prenom" class="form-control" [(ngModel)]="prenom" placeholder="Prenom">
+            <input type="text" name="prenom" id="prenom" class="form-control" [(ngModel)]="prenom" placeholder="Prenom"  required maxlength="255">
           </div>
       
           <div class="form-group mb-4">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" [(ngModel)]="emailCon" placeholder="Email">
-           <!-- <div *ngIf="serviceLoginService.errorMessage">{{ serviceLoginService.errorMessage }}</div> -->
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" [(ngModel)]="emailCon" placeholder="Email" required maxlength="255"  (input)="verifEmailConFonction()">
+
             <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
             <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p>
           </div>
       
           <div class="form-group mb-4">
-            <input type="password" name="password" id="password" class="form-control" [(ngModel)]="passwordCon" alert-dismissible placeholder="Mot de passe">
-           <!-- <div *ngIf="serviceLoginService.errorMessage">{{ serviceLoginService.errorMessage }}</div> -->
+            <input type="password" name="password" id="password" class="form-control" [(ngModel)]="passwordCon" alert-dismissible placeholder="Mot de passe" required minlength="6">
+        
             <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
             <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p>
           </div>
       
           <div class="form-group mb-4">
-            <input type="password" name="confirmerpassword" id="confirmerpassword" class="form-control" [(ngModel)]="confirmerpassword" alert-dismissible placeholder="Confirmer mot de passe">
+            <input type="password" name="confirmerpassword" id="confirmerpassword" class="form-control" [(ngModel)]="confirmerpassword" alert-dismissible placeholder="Confirmer mot de passe" required minlength="6" >
+            <div *ngIf="confirmerpassword.touched && confirmerpassword.errors?.passwordMismatch" class="error-message">
+              Les mots de passe ne correspondent pas.
+            </div>
           </div>
       
           <div class="btn-auth text-center">

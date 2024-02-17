@@ -347,6 +347,14 @@ h1,h5{
         color: #000;
       }
 
+      @media screen and (max-width: 1234px) {
+        .logo_name{
+            display: none;
+        }
+        .titreDomaine{
+            display: none;
+        }
+        }
 
 
 

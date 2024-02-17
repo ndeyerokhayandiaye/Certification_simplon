@@ -13,8 +13,8 @@ import { allguardsGuard } from '../guards/allguards.guard';
 const routes: Routes = [
   {path: '', component: MainComponent, children: [
     { path: '', redirectTo: 'dasboard-admin', pathMatch: 'full' },
-    { path: 'statistique', component: StatistiqueComponent },
-    { path: 'domaineActivite', component: DomainesActivitesComponent },
+    { path: 'statistique', component: StatistiqueComponent},
+    { path: 'domaineActivite', component: DomainesActivitesComponent  },
     { path: 'utilisateurs', component: GestionUtilisateursComponent },
     { path: 'forum', component: ForumComponent },
     { path: 'sujets', component: SujetsComponent },

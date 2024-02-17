@@ -42,7 +42,9 @@ export class DomainesActivitesComponent implements OnInit {
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
+      timer: 1500
+
     });
   }
 
@@ -69,9 +71,6 @@ export class DomainesActivitesComponent implements OnInit {
     this.selectedDomaine = domaine;
 
     this.editedDomaine = { ...domaine };
-  
-
-    // Open the modal here
 
   }
 

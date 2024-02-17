@@ -25,7 +25,7 @@ domain_id: any;
 // domain_id: number;
 
 listforums: Forum[];
-listSujets: Sujet[] = []; // Initialize as an empty array
+listSujets: Sujet[] = []; 
 selectedSujet: Sujet;
 
 userConnect: any;
@@ -36,27 +36,21 @@ forum_id: number;
   constructor(private forumSujetService: ForumSujetService,
     private formbuilder: FormBuilder,
     private forumService: ServiceForumService,
-               private domaineService: ServiceDomainesService,
-               private route: ActivatedRoute,
-               private router: Router,
-               private loginService: ServiceLoginService,  ) {
-
-                this.sujet = this.formbuilder.group({
-                  content: ['', Validators.required],
-                  forum_id: ['', Validators.required] // Add Validators.required for required field
-                });
+    private domaineService: ServiceDomainesService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private loginService: ServiceLoginService,  ) {
+    this.sujet = this.formbuilder.group({
+      content: ['', Validators.required],
+      forum_id: ['', Validators.required] // Ajouter les validators requis pour domaine
+              });
                }
-
-
-         
 
   listeDomaines: DomaineActivite[];
   forums: Forum[] = [];
   domain_name: string;
   domain_description: string;
-  // listSujets: Sujet[] = [];
   filteredSujets: Sujet[] = [];
-  // userConnect: any;
 
 
 
@@ -139,7 +133,9 @@ forum_id: number;
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
+      timer: 1500
+
     });
   }
 
@@ -163,9 +159,6 @@ forum_id: number;
     );
   }
 
-
-  
-
   logout() {
     this.loginService.logout().subscribe(
       () => {
@@ -187,8 +180,6 @@ forum_id: number;
       }
     );
   }
-
-
 }
 
 

@@ -129,7 +129,9 @@ logout() {
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
+      timer: 1500
+
     });
   }
 

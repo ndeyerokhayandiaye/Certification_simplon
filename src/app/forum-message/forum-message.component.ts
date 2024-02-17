@@ -39,6 +39,8 @@ export class ForumMessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userConnect = JSON.parse(localStorage.getItem("userConnect") || "");
+    this.likesCount = parseInt(localStorage.getItem('likesCount') || '0', 10);
+    this.dislikesCount = parseInt(localStorage.getItem('dislikesCount') || '0', 10);
     this.listerDomaine();
   
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -181,7 +183,22 @@ export class ForumMessageComponent implements OnInit {
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
+      timer: 1500
+
     });
+  }
+
+  likesCount = 0;
+  dislikesCount = 0;
+
+   like() {
+    this.likesCount++;
+    localStorage.setItem('likesCount', this.likesCount.toString());
+  }
+
+  dislike() {
+    this.dislikesCount++;
+    localStorage.setItem('dislikesCount', this.dislikesCount.toString());
   }
 }
