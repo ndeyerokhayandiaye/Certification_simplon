@@ -79,7 +79,7 @@ export class DomainesActivitesComponent implements OnInit {
   //   this.selectedDomaine = domaine;
   //   this.domaineActivite.patchValue({
   //     fieldname: domaine.fieldname,
-  //     description: domaine.description,
+  //     description: domaine.description
   //     picture: domaine.picture
   //   });
   // }

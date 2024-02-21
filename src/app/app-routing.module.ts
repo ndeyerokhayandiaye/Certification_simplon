@@ -9,6 +9,7 @@ import { ForumMessageComponent } from './forum-message/forum-message.component';
 import { ForumSujetSpecificComponent } from './forum-sujet-specific/forum-sujet-specific.component';
 import { allguardsGuard } from './guards/allguards.guard';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
@@ -23,7 +24,12 @@ const routes: Routes = [
 
       // partie admin
   { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule), canActivate:[allguardsGuard] },
+{ path: '**', component: MaintenanceComponent},
+
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

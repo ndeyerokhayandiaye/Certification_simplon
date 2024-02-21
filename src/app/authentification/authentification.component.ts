@@ -34,6 +34,9 @@ serviceLoginService: any;
   
   is_admin: boolean= false;
 
+  verifNom: string = '';
+  verifPrenom: string = '';
+
 
   ngOnInit(): void {
     if(!localStorage.getItem("userConnect")){
@@ -44,7 +47,7 @@ serviceLoginService: any;
 
 login(){
   if(this.emailCon == "" || this.passwordCon == ""){
-    this.verifierChamps("Champs vides","Veuillez remplir tous les champs","warning");
+    this.Alert("Champs vides","Veuillez remplir tous les champs","warning");
   }else{
     const user={
       email: this.emailCon,
@@ -52,8 +55,8 @@ login(){
     }
     this.loginService.login(user).subscribe(
       response => {
-        this.verifierChamps("Connexion établie","Vous êtes bien connecté","success");
-        console.log('Connexion spécifié', response);
+        this.Alert("Connexion établie","Vous êtes bien connecté","success");
+        console.log('Connexion spécifiée', response);
         // localStorage.setItem('token', response.authorization.token);
         localStorage.setItem('userConnect', JSON.stringify(response));
         if(response.user.is_admin==1){
@@ -67,28 +70,70 @@ login(){
         }
         else{
 
-          this.verifierChamps( "Connexion desétablie","Ce compte n'existe pas","error");
+          this.Alert( "Connexion desétablie","Ce compte n'existe pas","error");
         }
         // Sauvegarde des informations de connexion dans le localStorage     
 
 })
   }}
 
+
+  validateNom() {
+    
+    if (this.nom.length < 2 || !this.nom.match(/^[a-zA-Z\s]*$/)) {
+      this.verifNom = 'Le nom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+    } else {
+      this.verifNom = ''; // Le nom est valide, efface le message d'erreur
+    }
+  }
+
+  validatePrenom() {
+    if (this.prenom.length < 2 || !this.prenom.match(/^[a-zA-Z\s]*$/)) {
+      this.verifPrenom = 'Le prénom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+    } else {
+      this.verifPrenom = ''; // Le prénom est valide, efface le message d'erreur
+    }
+  }
+
   register() {
+    // const nameRegex=/^[a-zA-Z][a-zA-Z -]{1,100}$/;
+    this.verifEmailConFonction();
+    this.verifPasswordConFonction();
+   
      // Perform frontend validations
   if (this.nom === '' || this.prenom === '' || this.emailCon === '' || this.passwordCon === '' || this.confirmerpassword === '') {
-    this.verifierChamps('Champs vides', 'Veuillez remplir tous les champs', 'warning');
+    this.Alert('Champs vides', 'Veuillez remplir tous les champs', 'warning');
     return; 
   }
 
+    // Validate nom
+    if (this.nom.length < 2 || !this.nom.match(/^[a-zA-Z\s]*$/)) {
+      this.verifNom = 'Le nom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+      return;
+    }
+
+      // Validate prenom
+      if (this.prenom.length < 2 || !this.prenom.match(/^[a-zA-Z\s]*$/)) {
+        this.verifPrenom = 'Le prénom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+        return;
+      }
+
   if (this.passwordCon !== this.confirmerpassword) {
-    this.verifierChamps('Erreur', 'Les mots de passe ne correspondent pas', 'error');
+    this.Alert('Erreur', 'Les mots de passe ne correspondent pas', 'error');
     return; 
   }
 
   this.loginService.register(this.prenom, this.nom, this.emailCon, this.passwordCon, this.confirmerpassword).subscribe(
     response => {
-      console.log('Inscription effectuer avec success👏🏽', response);
+      console.log('Inscription effectuée avec success👏🏽', response);
+
+         // Réinitialiser les valeurs des champs
+         this.nom = '';
+         this.prenom = '';
+         this.emailCon = '';
+         this.passwordCon = '';
+         this.confirmerpassword = '';
+      
       // Sauvegarde des informations de connexion dans le localStorage
       localStorage.setItem('email', this.emailCon);
       localStorage.setItem('isLoggedIn', 'true');
@@ -96,7 +141,7 @@ login(){
       Swal.fire({
         icon: 'success',
         title: 'Inscription réussie',
-        text: 'Inscription effectuer avec success👏🏽',
+        text: 'Inscription effectuée avec success👏🏽',
         confirmButtonText: 'OK'
       }).then(() => {
         // Redirection vers la page d'accueil
@@ -106,13 +151,14 @@ login(){
     error => {
       console.error('Erreur lors de l inscription', error);
       // Affiche une alerte d'erreur
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur lors de l\'inscription',
-        text: 'Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer.',
-        confirmButtonText: 'OK',
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Erreur lors de l\'inscription',
+      //   text: 'Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer.',
+      //   confirmButtonText: 'OK',
+      //   timer: 1500
 
-      });
+      // });
     }
   );
   }
@@ -144,18 +190,23 @@ login(){
   }
 
   verifPasswordConFonction() {
+    const passwordRegex=/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/;
     this.exactPasswordCon = false;
     if (this.passwordCon === "") {
       this.verifPasswordCon = "Veuillez renseigner votre mot de passe";
     } else if (this.passwordCon.length < 5) {
       this.verifPasswordCon = "Mot de passe doit être supérieur ou égal à 5";
-    } else {
+    } 
+    // else if (!this.passwordCon.match(passwordRegex)) {
+    //   this.verifPasswordCon = "Mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractére spéciaux";
+    // }
+     else {
       this.verifPasswordCon = "";
       this.exactPasswordCon = true;
     }
   }
 
-  verifierChamps(title: any, text: any, icon: any) {
+  Alert(title: any, text: any, icon: any) {
     Swal.fire({
       title: title,
       text: text,
@@ -174,20 +225,6 @@ login(){
     this.exactPasswordCon = false;
   }
 
-  connexion() {
-    this.verifEmailConFonction();
-    this.verifPasswordConFonction();
-    if (this.exactEmailCon && this.exactPasswordCon) {
-      this.utilisateurTrouve = this.tabUtilisateurs.find((element: any) => element.email === this.emailCon && this.defaultPassword === this.passwordCon);
-      if (this.utilisateurTrouve) {
-        this.viderChampsCon();
-        this.verifierChamps("Félicitation!", "Authentifié avec succès", "success");
-        this.route.navigate(['gestionArticle', this.utilisateurTrouve.id]);
-      } else {
-        this.verifierChamps("Erreur!", "Le compte n'existe pas", "error");
-      }
-    }
-  }
 
   showForm() {
     this.changeForm = !this.changeForm;

@@ -1,67 +1,81 @@
 <body>
-    <div class="containerConnexion" *ngIf="changeForm"  >
-        <div class="connexion shadow mt-5">
-          <div class="cadre shadow py-3">
-            <h1 class="text-center fw-bold mb-5 mt-5" style="color: #0a2640;">Connexion</h1>
-            <form action="" class="mb-3 px-5">
-              <div class="mb-3">
-                <input type="email" name="email" class="form-control" id="emailInput" placeholder="Email" [(ngModel)]="emailCon" (input)="verifEmailConFonction()">
-                <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
-                <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p>
-              </div>
-              <div class="mb-3">
-                <input type="password" name="password" class="form-control" id="passwordInput" [(ngModel)]="passwordCon" placeholder="Mot de passe" (input)="verifPasswordConFonction()">
-                <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
-                <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p>
-              </div>
-              <div class="btn-auth text-center center">
-                <button type="button" class="btn btn-connexion me-3" (click)="login()">Se connecter</button>
-              </div>
-              <p class="login-card-footer-text mt-3 text-center" style="color: #0a2640;">Vous n'avez pas de compte ? <a style="color: #589ee0; cursor:pointer" (click)="showForm()">Creer un compte</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-      
-      <!-- registerform -->
-      
-      <div class="inscription mt-5" *ngIf="!changeForm"  >
-        <div class="container cadre2 shadow py-3 col-6" >
-          <h1 class="text-center fw-bold mb-5 mt-5" style="color: #0a2640;">Création de compte</h1>
-          <div class="form-group mb-4">
-            <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom" placeholder="Nom" required maxlength="255">
-          </div>
-      
-          <div class="form-group mb-4">
-            <input type="text" name="prenom" id="prenom" class="form-control" [(ngModel)]="prenom" placeholder="Prenom"  required maxlength="255">
-          </div>
-      
-          <div class="form-group mb-4">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" [(ngModel)]="emailCon" placeholder="Email" required maxlength="255"  (input)="verifEmailConFonction()">
-
+  <div class="containerConnexion" *ngIf="changeForm">
+    <div class="connexion shadow mt-5">
+      <div class="cadre shadow py-3">
+        <h1 class="text-center fw-bold mb-5 mt-5" style="color: #0a2640;">Connexion</h1>
+        <form action="" class="mb-3 px-5">
+          <div class="mb-3">
+            <input type="email" name="email" class="form-control" id="emailInput" placeholder="Email"
+              [(ngModel)]="emailCon" (input)="verifEmailConFonction()">
             <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
             <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p>
           </div>
-      
-          <div class="form-group mb-4">
-            <input type="password" name="password" id="password" class="form-control" [(ngModel)]="passwordCon" alert-dismissible placeholder="Mot de passe" required minlength="6">
-        
+          <div class="mb-3">
+            <input type="password" name="password" class="form-control" id="passwordInput" [(ngModel)]="passwordCon"
+              placeholder="Mot de passe" (input)="verifPasswordConFonction()">
             <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
             <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p>
           </div>
-      
-          <div class="form-group mb-4">
-            <input type="password" name="confirmerpassword" id="confirmerpassword" class="form-control" [(ngModel)]="confirmerpassword" alert-dismissible placeholder="Confirmer mot de passe" required minlength="6" >
-            <div *ngIf="confirmerpassword.touched && confirmerpassword.errors?.passwordMismatch" class="error-message">
-              Les mots de passe ne correspondent pas.
-            </div>
+          <div class="btn-auth text-center center">
+            <button type="button" class="btn btn-connexion me-3" (click)="login()">Se connecter</button>
           </div>
-      
-          <div class="btn-auth text-center">
-            <button type="button" class="btn btn-connexion me-3 btn-block login-btn mb-4" (click)="register()">S'inscrire</button>
-          </div>
-      
-          <p class="login-card-footer-text text-center" style="color: #0a2640;">Déjà un compte ? <a  style="color: #589ee0; cursor: pointer;" (click)="showForm()">Se connecter</a></p>
+          <p class="login-card-footer-text mt-3 text-center" style="color: #0a2640;">Vous n'avez pas de compte ? <a
+              style="color: #589ee0; cursor:pointer" (click)="showForm()">Creer un compte</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- registerform -->
+
+  <div class="inscription mt-5" *ngIf="!changeForm">
+    <div class="container cadre2 shadow py-3 col-6">
+      <h1 class="text-center fs-4 fw-bold mb-5 mt-5" style="color: #0a2640;">Création de compte</h1>
+      <div class="form-group mb-4">
+        <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom" placeholder="Nom" required
+          maxlength="255" (input)="validateNom()">
+          <div class="validation-error" *ngIf="verifNom !== ''">{{verifNom}}</div>
+       
+      </div>
+
+      <div class="form-group mb-4">
+        <input type="text" name="prenom" id="prenom" class="form-control" [(ngModel)]="prenom" placeholder="Prenom"
+          required maxlength="255" (input)="validatePrenom()">
+          <div class="validation-error" *ngIf="verifPrenom !== ''">{{verifPrenom}}</div>
+         
+      </div>
+
+      <div class="form-group mb-4">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email address"
+          [(ngModel)]="emailCon" placeholder="Email" required maxlength="255" (input)="verifEmailConFonction()">
+
+        <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmailCon}}</p>
+        <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p>
+      </div>
+
+      <div class="form-group mb-4">
+        <input type="password" name="password" id="password" class="form-control" [(ngModel)]="passwordCon"
+          alert-dismissible placeholder="Mot de passe" required minlength="6">
+
+        <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
+        <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p>
+      </div>
+
+      <div class="form-group mb-4">
+        <input type="password" name="confirmerpassword" id="confirmerpassword" class="form-control"
+          [(ngModel)]="confirmerpassword" alert-dismissible placeholder="Confirmer mot de passe" required minlength="6">
+        <div *ngIf="confirmerpassword.touched && confirmerpassword.errors?.passwordMismatch" class="error-message">
+          Les mots de passe ne correspondent pas.
         </div>
       </div>
+
+      <div class="btn-auth text-center">
+        <button type="button" class="btn btn-connexion me-3 btn-block login-btn mb-4"
+          (click)="register()">S'inscrire</button>
+      </div>
+
+      <p class="login-card-footer-text text-center" style="color: #0a2640;">Déjà un compte ? <a
+          style="color: #589ee0; cursor: pointer;" (click)="showForm()">Se connecter</a></p>
+    </div>
+  </div>
 </body>

@@ -115,18 +115,28 @@ export class ForumComponent implements OnInit {
     );
   }
 
+  // updateForum(forum: Forum): void {
+  
+
+  //   this.forumService.updateForum(forum.id, forum).subscribe(
+  //     updatedForum => {
+  //       console.log('Le forum a été mis à jour avec succès :', updatedForum);
+  //       this.listForums(); // Actualiser la liste des forums après la mise à jour
+  //     },
+  //     error => {
+  //       console.log('Une erreur s\'est produite lors de la modification du forum :', error);
+  //     }
+  //   );
+  // }
+
+
   updateForum(forum: Forum): void {
-    // const formData = new FormData();
 
-    // formData.append('forumname', this.forum.value.forumname);
-    // formData.append('description', this.forum.value.description);
-    // formData.append('field_id', this.forum.value.field_id);
-    // formData.append('user_id', this.userConnect.user.id);
-
-    this.forumService.updateForum(forum.id, forum).subscribe(
+    this.forumService.updateForum(this.selectedForum.id, this.editedForum).subscribe(
       updatedForum => {
         console.log('Le forum a été mis à jour avec succès :', updatedForum);
-        this.listForums(); // Actualiser la liste des forums après la mise à jour
+        this.Alert("Succès", "Forum modifier avec succès", "success");
+        this.listForums(); 
       },
       error => {
         console.log('Une erreur s\'est produite lors de la modification du forum :', error);

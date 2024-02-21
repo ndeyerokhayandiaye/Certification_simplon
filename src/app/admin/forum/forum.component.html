@@ -75,20 +75,20 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du forum</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form [formGroup]="forum" (ngSubmit)="ajoutForum()">
+      <form [formGroup]="forum" (ngSubmit)="updateForum(forum.value)">
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input type="text" name="forumname" class="form-control" [(ngModel)]="newForum.forumname"
+            <input type="text" name="forumname"  [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="editedForum.forumname"
               placeholder="Nom du forum">
             <label for="forumname">Nom du forum</label>
           </div>
           <div class="form-floating">
-            <input type="text" name="description" class="form-control" [(ngModel)]="newForum.description"
+            <input type="text" name="description"  [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="editedForum.description"
               placeholder="Description">
             <label for="description">Description</label>
           </div>
           <div class="form-floating">
-            <select class="form-select  select_optionn" aria-label="Default select example"  [(ngModel)]="newForum.field_id">
+            <select class="form-select  select_optionn"  [ngModelOptions]="{standalone: true}" aria-label="Default select example"  [(ngModel)]="editedForum.field_id">
               <option selected hidden>Choisissez un domaine</option>              
               <option *ngFor="let domaine of listeDomaines" [value]="domaine.id">{{ domaine.fieldname }}</option>
             </select>
@@ -97,7 +97,7 @@
 
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" type="submit">Modifier</button>
+          <button class="btn btn-primary"  (click)="openEditModal(editedForum)" type="submit">Modifier</button>
         </div>
       </form>
     </div>

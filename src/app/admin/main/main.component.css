@@ -7,5 +7,6 @@
     background-color: white !important;
 }
 .home-content{
-    height: 150vh !important;
+    height: auto !important;
+    /* height: 130vh !important; */
 }

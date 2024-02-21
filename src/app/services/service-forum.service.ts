@@ -20,6 +20,10 @@ export class ServiceForumService {
   }
 
 
+  // updateForum(id: number, forum: Forum): Observable<Forum> {
+  //   return this.http.put<Forum>(`${baseUrl}/updateforum/${id}`, forum);
+  // }
+  
   updateForum(id: number, forum: Forum): Observable<Forum> {
     return this.http.put<Forum>(`${baseUrl}/updatespecificforum/${id}`, forum);
   }

@@ -22,6 +22,7 @@ import { AdminModule } from './admin/admin.module';
 import { ForumSujetSpecificComponent } from './forum-sujet-specific/forum-sujet-specific.component';
 import { CommonModule } from '@angular/common';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 // import { DataTablesModule } from 'angular-datatables';
 // import { DataTablesModule } from 'angular-datatables';
 // import { DataTablesModule } from 'angular-datatables/src/angular-datatables.module';
@@ -42,6 +43,7 @@ import { ProfilUserComponent } from './profil-user/profil-user.component';
     ForumMessageComponent,
     ForumSujetSpecificComponent,
     ProfilUserComponent,
+    MaintenanceComponent,
   ],
   imports: [
     BrowserModule,
