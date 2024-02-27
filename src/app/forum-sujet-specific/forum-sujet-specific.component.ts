@@ -11,6 +11,7 @@ import { ServiceForumService } from '../services/service-forum.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServiceLoginService } from '../services/service-login.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,9 @@ domain_id: any;
 // domain_id: number;
 
 listforums: Forum[];
-listSujets: Sujet[] = []; 
+listSujets: Sujet[] = [];
+domaineActifId: number | null = null;
+
 selectedSujet: Sujet;
 
 userConnect: any;
@@ -55,6 +58,18 @@ forum_id: number;
 
 
   ngOnInit() {
+
+    const sidebar = document.querySelector(".sidebar") as HTMLElement;
+    const sidebarBtn = document.querySelector(".sidebarBtn") as HTMLElement;
+
+sidebarBtn.onclick = function () {
+  sidebar.classList.toggle("active");
+  if (sidebar.classList.contains("active")) {
+    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+};
 
     // this.chargerSujets(); // Appel de la méthode pour charger les sujets existants au chargement de la page
     this.listForums();
@@ -111,12 +126,29 @@ forum_id: number;
     this.domaineService.listerDomaine().subscribe(
       (domaines: DomaineActivite[]) => {
         this.listeDomaines = domaines;
-      },
+
+        // Mettez à jour le domaine actif si nécessaire
+      if (this.listeDomaines.length > 0 && this.domaineActifId === null) {
+        this.domaineActifId = this.listeDomaines[0].id; // Par exemple, choisissez le premier domaine comme actif par défaut
+      }
+
+      console.log("listeDomaines: ", this.listeDomaines);
+
+    },
       (error) => {
         console.log(error);
       }
     );
   }
+
+  // Is Actif domaine
+  
+  isActive(domaineId: number): boolean {
+    // Si aucun domaine n'est actif et que c'est le premier élément de la liste,
+  // ou si le domaine actif correspond à l'ID passé en paramètre, retournez true
+  return (this.domaineActifId === null && domaineId === this.listeDomaines[0].id)
+  }
+  // || domaineId === this.domaineActifId;
 
   listForums(): void {
     this.forumService.getAllForums().subscribe(

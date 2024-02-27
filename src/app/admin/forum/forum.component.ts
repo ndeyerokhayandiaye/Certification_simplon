@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { DomaineActivite } from 'src/app/models/DomaineActivite';
 import { ServiceDomainesService } from 'src/app/services/service-domaines.service';
 import { ServiceForumService } from 'src/app/services/service-forum.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class ForumComponent implements OnInit {
   constructor(
     private domaineService: ServiceDomainesService,
     private forumService: ServiceForumService,
-     private formbuilder: FormBuilder) {
+     private formbuilder: FormBuilder,
+     private http: HttpClient) {
     this.forum = this.formbuilder.group({
       forumname: ["", [Validators.required, Validators.maxLength(200)]],
       description: ["", [Validators.required, Validators.maxLength(500)]],
@@ -169,6 +171,33 @@ export class ForumComponent implements OnInit {
       }
     })
 
+  }
+
+
+
+  
+   // Attribut pour la pagination
+   articlesParPage = 3; // Nombre d'articles par page
+   pageActuelle = 1; // Page actuelle
+
+
+
+// pagination
+  
+getArticlesPage(): any[] {
+  const indexDebut = (this.pageActuelle - 1) * this.articlesParPage;
+  const indexFin = indexDebut + this.articlesParPage;
+  return this.forums.slice(indexDebut, indexFin);
+}
+   // Méthode pour générer la liste des pages
+   get pages(): number[] {
+    const totalPages = Math.ceil(this.forums.length / this.articlesParPage);
+    return Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    return Math.ceil(this.forums.length / this.articlesParPage);
   }
 
 }

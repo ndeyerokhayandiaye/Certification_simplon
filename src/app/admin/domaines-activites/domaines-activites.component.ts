@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomaineActivite } from 'src/app/models/DomaineActivite';
@@ -23,7 +24,9 @@ export class DomainesActivitesComponent implements OnInit {
   editedDomaine: DomaineActivite = { id: null, fieldname: '', description: '', picture: null };
   // fieldname!: string;
 
-  constructor(private domaineService: ServiceDomainesService, private formbuilder: FormBuilder) {
+  constructor(private domaineService: ServiceDomainesService,
+    private http: HttpClient,
+     private formbuilder: FormBuilder) {
     this.domaineActivite = this.formbuilder.group({
       fieldname: ["", [Validators.required, Validators.maxLength(200)]],
       description: ["", [Validators.required, Validators.maxLength(500)]],
@@ -34,8 +37,16 @@ export class DomainesActivitesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.userConnect = JSON.parse(localStorage.getItem("userConnect") || "");
     this.listerDomaine();
+
+    const openPopupBtn = document.querySelector(".open-popup-btn") as HTMLElement;
+const popup = document.querySelector(".popup") as HTMLElement;
+
+openPopupBtn.addEventListener("click", () => {
+  popup.style.display = "block";
+});
   }
 
   Alert(title: any, text: any, icon: any) {
@@ -128,6 +139,31 @@ export class DomainesActivitesComponent implements OnInit {
     );
   }
 
+
+
+  
+   // Attribut pour la pagination
+   articlesParPage = 3; // Nombre d'articles par page
+   pageActuelle = 1; // Page actuelle
+
+
+// pagination
+getArticlesPage(): any[] {
+  const indexDebut = (this.pageActuelle - 1) * this.articlesParPage;
+  const indexFin = indexDebut + this.articlesParPage;
+  return this.listeDomaines.slice(indexDebut, indexFin);
+}
+   // Méthode pour générer la liste des pages
+   get pages(): number[] {
+    const totalPages = Math.ceil(this.listeDomaines.length / this.articlesParPage);
+    return Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    return Math.ceil(this.listeDomaines.length / this.articlesParPage);
+  }
+  
 
 }
 

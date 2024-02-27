@@ -24,6 +24,7 @@ const routes: Routes = [
 
       // partie admin
   { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule), canActivate:[allguardsGuard] },
+  
 { path: '**', component: MaintenanceComponent},
 
 ];

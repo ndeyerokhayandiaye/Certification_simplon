@@ -14,10 +14,10 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top" style="height: 100px;">
+  <!-- <header id="header" class="fixed-top" style="height: 100px;">
     <div class="container d-flex align-items-center justify-content-lg-between">
         <a href="index.html"><img src="assets/img/logo.png" height="42px" alt="" style="opacity: 0.9;"></a>
-        <!-- nav -->
+
         <nav id="navbar" class="navbar order-last order-lg-0" style="padding-top: 15px;"> 
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Accueil</a></li>
@@ -25,16 +25,38 @@
                 <li><a class="nav-link scrollto" href="#services">Services</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
             </ul>
-            <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
-        </nav>
-        <!-- .navbar -->
+
+          </nav>
 
         <a routerLink="/login" class="get-started-btn scrollto" style="margin-top: 4px; font-weight: bold; text-decoration: none; ">Rejoindre la communauté</a>
 
 
     </div>
-</header>
+</header> -->
 
+
+<header id="header" class="fixed-top" style="height: 100px;">
+  <div class="container d-flex align-items-center justify-content-lg-between">
+    <a href="index.html"><img src="assets/img/logo.png" height="42px" alt="" style="opacity: 0.9;"></a>
+    <!-- nav -->
+    <nav id="navbar" class="navbar order-last order-lg-0" style="padding-top: 15px;">
+      <div class="navbar-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="navbar-menu">
+        <li><a class="nav-link scrollto active" href="#hero">Accueil</a></li>
+        <li><a class="nav-link scrollto" href="#about">A propos</a></li>
+        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- .navbar -->
+
+    <a routerLink="/login" class="get-started-btn scrollto" style="margin-top: 4px; font-weight: bold; text-decoration: none;">Rejoindre la communauté</a>
+  </div>
+</header>
 
 
 
@@ -47,9 +69,9 @@
       <div class="row">
         <div class="col-12" data-aos="fade-up" data-aos-delay="150" style="text-align: left; margin-top: -30px;"> 
           <!-- <h1>PËNC</h1> -->
-          <p class="fs-5 fw-medium w-50 text-white">Connectez, Collaborez, Prospérez <br/> Avez-vous besoin d'un espace où vous pouvez interagir, échanger des idées et établir des contacts avec d'autres experts de votre domaine d’activité  <span>?</span></p>
+          <p class="pPara fs-5 fw-medium w-50 text-white">Connectez, Collaborez, Prospérez <br/> Avez-vous besoin d'un espace où vous pouvez interagir, échanger des idées et établir des contacts avec d'autres experts de votre domaine d’activité  <span>?</span></p>
 
-          <a routerLink="/login" class="get-started-btn scrollto" style="margin-top: 30px; font-weight: bold; text-decoration: none; ">Rejoindre la communauté</a>
+          <a routerLink="/login" class="get-started-btn scrollto " style="margin-top: 30px; font-weight: bold; text-decoration: none; ">Rejoindre la communauté</a>
         </div>
       </div>
     </div>
@@ -131,7 +153,7 @@
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
           
             <div class="custom-heading1 mt-5">
-              <h1 class="custom-heading text-start">POUSSEZ VOS LIMITES</h1>
+              <h1 class="h1para custom-heading text-start">POUSSEZ VOS LIMITES</h1>
               <h4 class="fs-4 fw-light" style="font-family: poppins ;">Élevez votre passion au niveau supérieur : Connectez-vous, échangez et progressez avec notre application qui rapproche les passionnés et vous propulse vers de nouveaux sommets !</h4>
             </div>            
           </div>
@@ -404,6 +426,35 @@
   <div id="preloader"></div>
   <a href="accueil" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+
+  <script>
+    // Sélectionnez l'élément du menu burger
+const navbarToggle = document.querySelector('.navbar-toggle');
+// Sélectionnez l'élément du menu
+const navbarMenu = document.querySelector('.navbar-menu');
+
+// Vérifiez si les éléments existent avant d'ajouter les écouteurs d'événements
+if (navbarToggle && navbarMenu) {
+  // Ajoutez un écouteur d'événement pour le clic sur le menu burger
+  navbarToggle.addEventListener('click', () => {
+    // Basculez la classe active pour afficher ou masquer le menu
+    navbarToggle.classList.toggle('active');
+    navbarMenu.classList.toggle('active');
+  });
+
+  // Ajoutez un écouteur d'événement pour la fermeture du menu lors du clic sur un lien
+  const navLinks = navbarMenu.querySelectorAll('a');
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      navbarToggle.classList.remove('active');
+      navbarMenu.classList.remove('active');
+    });
+  });
+}
+  </script>
+
 </body>
+
+
 
 </html>

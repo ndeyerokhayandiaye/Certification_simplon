@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomaineActivite } from 'src/app/models/DomaineActivite';
@@ -11,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor(private domaineService: ServiceDomainesService) {
+  constructor(private domaineService: ServiceDomainesService,
+    private http: HttpClient) {
     // this.domaineActivite = this.formbuilder.group({
     //   fieldname: ["", [Validators.required, Validators.maxLength(200)]],
     //   description: ["", [Validators.required, Validators.maxLength(500)]],

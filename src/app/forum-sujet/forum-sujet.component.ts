@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Sujet } from '../models/Sujet';
 import { ServiceForumService } from '../services/service-forum.service';
 import { ServiceLoginService } from '../services/service-login.service';
-
+// import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-forum-sujet',
   templateUrl: './forum-sujet.component.html',
@@ -25,6 +25,8 @@ export class ForumSujetComponent implements OnInit {
     ) {}
 
   listeDomaines: DomaineActivite[];
+  domaineActifId: number | null = null;
+
   listSujets: Sujet[] = [];
   newForum: Sujet = { id: 0, content: '', forum_id: null, forum:null, user_id: null , message_received: null, created_at: null};
   content = "";
@@ -33,6 +35,18 @@ export class ForumSujetComponent implements OnInit {
   ngOnInit(): void {
       this.listerDomaine();
       this.loadForums();
+
+      const sidebar = document.querySelector(".sidebar") as HTMLElement;
+      const sidebarBtn = document.querySelector(".sidebarBtn") as HTMLElement;
+  
+  sidebarBtn.onclick = function () {
+    sidebar.classList.toggle("active");
+    if (sidebar.classList.contains("active")) {
+      sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+    } else {
+      sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  };
 
    }
 
@@ -138,16 +152,25 @@ logout() {
   listerDomaine(): void {
     this.domaineService.listerDomaine().subscribe(
       (domaines: DomaineActivite[]) => {
-
-        console.log("la liste de tout les domaines",domaines)
-        // console.log(domaines)
         this.listeDomaines = domaines;
-      },
+
+        // Mettez à jour le domaine actif si nécessaire
+      if (this.listeDomaines.length > 0 && this.domaineActifId === null) {
+        this.domaineActifId = this.listeDomaines[0].id; // Par exemple, choisissez le premier domaine comme actif par défaut
+      }
+
+      console.log("listeDomaines: ", this.listeDomaines);
+
+    },
       (error) => {
         console.log(error);
-        // Traitez l'erreur ici
       }
     );
+  }
+
+  // Is Actif domaine
+  isActive(domaineId: number): boolean {
+    return domaineId === this.domaineActifId;
   }
 
 }

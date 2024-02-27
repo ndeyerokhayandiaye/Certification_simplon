@@ -16,16 +16,24 @@
         <h4 class="titreDomaine text-white px-4 mt-4">DOMAINES</h4>
       </div>
       <ul class="nav-links">
-        <li *ngFor="let domaine of listeDomaines"  [routerLinkActive]="['activeMenu']">
+        <li *ngFor="let domaine of listeDomaines" [routerLinkActive]="['activeMenu']">
+          <a class="fw-bold fs-4" [routerLink]="['/forumSujetSpecific', domaine.id]" 
+             [ngClass]="{'active': isActive(domaine.id)}">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">{{ domaine.fieldname }}</span>
+          </a>
+        </li>
+        
+
+        <!-- <li *ngFor="let domaine of listeDomaines"  [routerLinkActive]="['activeMenu']">
           <a class="fw-bold fs-4 active "[routerLink]="['/forumSujetSpecific', domaine.id]" href="forumSujetSpecific/{{ domaine.id }}" >
             <i class="bx bx-grid-alt"></i>
             <span  class="active links_name"  > {{
               domaine.fieldname }} </span>
-            <!-- <span class="menuItem"  class="links_name"> {{ domaine.id }} </span> -->
           </a>
   
           
-        </li>
+        </li> -->
   
   
         <li class="log_out">
@@ -40,6 +48,9 @@
       <section class="home-section">
 
         <nav class="nav-admin shadow d-flex" style="padding-right: 22px;">
+          <div class="sidebar-button"  >
+            <i class="bx bx-menu sidebarBtn"></i>
+          </div>
           <div class="flex-grow-1"></div>
           <div class="icon-notification fs-4 text-end fw-bold" style="margin-right: 11px;">
             <i class="fa-regular fa-bell" style="color: #0a2640;"></i>

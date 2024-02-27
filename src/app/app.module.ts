@@ -16,6 +16,7 @@ import { HeaderAdminComponent } from './layout/header-admin/header-admin.compone
 import { ForumSujetComponent } from './forum-sujet/forum-sujet.component';
 import { ForumMessageComponent } from './forum-message/forum-message.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceLoginService } from './services/service-login.service';
 import { AuthInterceptor } from './intercepteur/intercepteur';
 import { AdminModule } from './admin/admin.module';
@@ -23,6 +24,8 @@ import { ForumSujetSpecificComponent } from './forum-sujet-specific/forum-sujet-
 import { CommonModule } from '@angular/common';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+// import { HttpClientModule } from '@angular/common/http';
+
 // import { DataTablesModule } from 'angular-datatables';
 // import { DataTablesModule } from 'angular-datatables';
 // import { DataTablesModule } from 'angular-datatables/src/angular-datatables.module';

@@ -14,6 +14,7 @@ import { SujetsComponent } from './sujets/sujets.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UtilisateursBloquesComponent } from './utilisateurs-bloques/utilisateurs-bloques.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ForumComponent,
     SujetsComponent,
     MessagesComponent,
-    UtilisateursBloquesComponent
+    UtilisateursBloquesComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

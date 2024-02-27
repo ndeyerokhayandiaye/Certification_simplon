@@ -1,77 +1,75 @@
-<div class="sidebar">
-    <div class="logo-details">
-      <i class=""></i>
-      <span  routerLink="statistique"  class="logo_name "  style="cursor: pointer;">pënc</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <a  class="active">
-          <i class="bx bx-grid-alt " routerLink="statistique"  style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="statistique"  class="links_name" style="cursor: pointer;"> Statistique </span>
-        </a>
-      </li>
-      <li>
-        <a >
-          <i class="bx bx-box" routerLink="domaineActivite"  style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="domaineActivite"  class="links_name"  style="cursor: pointer;" >Domaines d'activités</span>
-        </a>
-      </li>
+<div class="sidebar ">
+  <div class="logo-details">
+    <i class=""></i>
+    <span routerLink="statistique" class="logo_name " style="cursor: pointer;">pënc</span>
+  </div>
+  <ul class="nav-links">
+    <li class="active" routerLinkActive="activeMenu" routerLink="statistique">
+      <a>
+        <i class="bx bx-grid-alt " routerLink="statistique" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;"> Statistique </span>
+      </a>
+    </li>
+    <li routerLinkActive="activeMenu" routerLink="domaineActivite">
+      <a>
+        <i class="bx bx-box" routerLink="domaineActivite" style="cursor: pointer;"></i>
+        <span class="menuItem text-white" style="cursor: pointer;">Domaines d'activités</span>
+      </a>
+    </li>
 
-      <li>
-        <a >
-          <i class="bx bx-user" routerLink="utilisateurs" style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="utilisateurs"  class="links_name"  style="cursor: pointer;">Gestion utilisateurs</span>
-        </a>
-      </li>
+    <li routerLinkActive="activeMenu" routerLink="utilisateurs">
+      <a>
+        <i class="bx bx-user" routerLink="utilisateurs" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;">Gestion utilisateurs</span>
+      </a>
+    </li>
 
-      <li>
-        <a >
-          <i class="bx bx-pie-chart-alt-2" routerLink="forum" style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="forum"  class="links_name"  style="cursor: pointer;">Gestion forum </span>
-        </a>
-      </li>
-      <li>
-        <a >
-          <i class="bx bx-list-ul" routerLink="sujets" style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="sujets"  class="links_name"  style="cursor: pointer;">Gestion sujets</span>
-        </a>
-      </li>
-     
-     
-     
-     
-      <!-- <li>
+    <li routerLinkActive="activeMenu" routerLink="forum">
+      <a>
+        <i class="bx bx-pie-chart-alt-2" routerLink="forum" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;">Gestion forum </span>
+      </a>
+    </li>
+    <li routerLinkActive="activeMenu" routerLink="sujets">
+      <a>
+        <i class="bx bx-list-ul" routerLink="sujets" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;">Gestion sujets</span>
+      </a>
+    </li>
+
+
+    <!-- <li>
         <a >
           <i class="bx bx-message"  style="cursor: pointer;"></i>
           <span class="menuItem" routerLinkActive="activeMenu" routerLink="messages"  class="links_name"  style="cursor: pointer;">Messages</span>
         </a>
       </li> -->
 
-      <li>
-        <a >
-          <!-- <i class="bx bx-heart"></i> -->
-          <i class="bx bx-user-x" routerLink="utilisateursbloques" style="cursor: pointer;"></i>
-          <span class="menuItem"  routerLinkActive="activeMenu" routerLink="utilisateursbloques"  class="links_name"  style="cursor: pointer;">Utilisateurs bloqués</span>
-        </a>
-      </li>
-    
-      <li class="log_out">
-        <a (click)=" logout() ">
-          <i class="bx bx-log-out"  style="cursor: pointer;"></i>
-          <span class="menuItem" routerLinkActive="activeMenu" routerLink="accueil"  class="links_name"  style="cursor: pointer;">Log out</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+    <li routerLinkActive="activeMenu" routerLink="utilisateursbloques">
+      <a>
+        <!-- <i class="bx bx-heart"></i> -->
+        <i class="bx bx-user-x" routerLink="utilisateursbloques" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;">Utilisateurs bloqués</span>
+      </a>
+    </li>
+
+    <li class="log_out" routerLinkActive="activeMenu" routerLink="accueil">
+      <a (click)=" logout() ">
+        <i class="bx bx-log-out" style="cursor: pointer;"></i>
+        <span class="menuItem" class="links_name" style="cursor: pointer;">Se deconnecter</span>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
-  <script>
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function () {
-      sidebar.classList.toggle("active");
-      if (sidebar.classList.contains("active")) {
-        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-      } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    };
-  </script>
+<script>
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".sidebarBtn");
+  sidebarBtn.onclick = function () {
+    sidebar.classList.toggle("active");
+    if (sidebar.classList.contains("active")) {
+      sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+    } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  };
+</script>

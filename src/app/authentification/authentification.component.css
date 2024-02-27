@@ -1,51 +1,53 @@
-
-body{
-    background-color: #0a2640;
-    color: #fff;
-    padding: 107px;
-    text-align: center;
-    /* height: 9000%; */
+body {
+  background-color: #0a2640;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 2px solid black;
+  min-height: 100vh;
+  min-width: 200px;
 }
 
+.containerConnexion {
+  margin: 0%;
+  padding: 0%;
+}
 .cadre {
-    margin-top: 205px;
-    background-color: white;
-    border-radius: 2%;
-    /* height: 100%; */
+  background-color: white;
+  border-radius: 2%;
+}
 
+.inscription {
+  margin: 0%;
+  width: 70%;
+  min-width: 105px;
+  max-width: 600px;
+}
 
-  }
-  .cadre2 {
-    /* margin-top: 200px; */
-    background-color: white;
-    border-radius: 2%;
+.cadre2 {
+  width: 100%;
+}
 
+.btn-connexion {
+  width: 100%;
+  color: white;
+  background-color: #0a2640;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-  }
-  
-  .connexion {
-    margin: 10vh auto;
-    max-width: 71vh;
-  }
-  
-  .btn-connexion {
-    width: 100%;
-    color: white;
-    background-color: #0a2640;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .form-control{
-    padding: 2.5%;
-  }
-  
+.form-control {
+  padding: 2.5%;
+}
+.validation-error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media screen and(min-width: 576px) {
   .inscription {
-    margin: 15%;
-
+    width: 100%;
   }
-  .validation-error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
+}

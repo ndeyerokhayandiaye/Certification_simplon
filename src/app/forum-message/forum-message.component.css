@@ -8,9 +8,12 @@
   margin-left: 20vh;
 }
 
-.active{
-  color: #FFC107 !important;
+
+.activeMenu {
+  background-color: #FFC107;
+  color: #fff;
 }
+
 
 .card {
   background-color: #fff;

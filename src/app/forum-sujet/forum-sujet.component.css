@@ -19,6 +19,11 @@
     font-weight: 400;
     white-space: nowrap;
   }
+
+  /* .active {
+    text-decoration: underline yellow; 
+    color: yellow; 
+  } */
   
   .search-button {
     padding: 8px 16px;
@@ -213,6 +218,18 @@
       .logo_name{
           display: none;
       }
+
+      /* .sidebar .logo-details .logo_name{
+
+        font-family: "Kaushan Script";
+        font-size: 100%;
+        color: #FFC107;
+        font-weight: bolder;
+        text-decoration: none;
+        
+      }
+       */
+
       .titreDomaine{
           display: none;
       }

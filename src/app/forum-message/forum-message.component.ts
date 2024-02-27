@@ -9,6 +9,7 @@ import { ServiceDomainesService } from '../services/service-domaines.service';
 import { ForumSujetService } from '../services/forum-sujet.service';
 import { ServiceLoginService } from '../services/service-login.service';
 import Swal from 'sweetalert2';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-forum-message',
@@ -19,6 +20,9 @@ export class ForumMessageComponent implements OnInit {
   listeDomaines: DomaineActivite[] = [];
   reponses: Reponse[] = [];
   messages: Message[] = [];
+  infoUserMessage: any[] = [];
+  infoUserReponse: any[] = [];
+  users: any[] = [];
   forums: Forum[] = [];
   domain_name: string = '';
   content: string = '';
@@ -28,16 +32,21 @@ export class ForumMessageComponent implements OnInit {
   messageForm: FormGroup;
   reponseForm: FormGroup;
 
+  domaineActifId: number | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private domaineService: ServiceDomainesService,
     private forumSujetService: ForumSujetService,
-    private loginService: ServiceLoginService
+    private loginService: ServiceLoginService,
+    private userService: UserServiceService
   ) {}
 
   ngOnInit(): void {
+   
+    this.ListeDesUsers();
     this.userConnect = JSON.parse(localStorage.getItem("userConnect") || "");
     this.likesCount = parseInt(localStorage.getItem('likesCount') || '0', 10);
     this.dislikesCount = parseInt(localStorage.getItem('dislikesCount') || '0', 10);
@@ -66,19 +75,57 @@ export class ForumMessageComponent implements OnInit {
       message_id: ["", [Validators.required, Validators.maxLength(500)]],
       user_id: [""],
     });
+
+// pour menu burger
+    const sidebar = document.querySelector(".sidebar") as HTMLElement;
+    const sidebarBtn = document.querySelector(".sidebarBtn") as HTMLElement;
+
+sidebarBtn.onclick = function () {
+  sidebar.classList.toggle("active");
+  if (sidebar.classList.contains("active")) {
+    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+};
+
   }
 
   listerDomaine(): void {
     this.domaineService.listerDomaine().subscribe(
       (domaines: DomaineActivite[]) => {
         this.listeDomaines = domaines;
-      },
+
+        // Mettez à jour le domaine actif si nécessaire
+      if (this.listeDomaines.length > 0 && this.domaineActifId === null) {
+        this.domaineActifId = this.listeDomaines[0].id; // Par exemple, choisissez le premier domaine comme actif par défaut
+      }
+
+      console.log("listeDomaines: ", this.listeDomaines);
+
+    },
       (error) => {
         console.log(error);
       }
     );
   }
 
+  // Is Actif domaine
+  isActive(domaineId: number): boolean {
+    return domaineId === this.domaineActifId;
+  }
+
+
+  // liste des users
+  ListeDesUsers(){
+    this.userService.getUsers()
+        .subscribe(users => {
+          this.users = users;
+          console.log("liste des losers: ", users)
+        });
+  }
+
+  
   listMessageBySujet(id: number): void {
     this.forumSujetService.getSujetByID(id).subscribe(
       (sujets: any) => {
@@ -88,6 +135,20 @@ export class ForumMessageComponent implements OnInit {
         this.content = sujets.content;
         this.date = sujets.created_at;
         this.messages = sujets.messages;
+        console.log(this.messages);
+
+
+        // Pour chaque signalement, trouvez l'utilisateur et l'annonce concernée
+        this.messages.forEach((message) => {
+          const messageUser = this.users.find(
+            (user) => user.id === message.user_id
+          );
+          // console.log('usersmessages: ', messageUser);
+
+          message.infoUserMessage = messageUser;
+        });
+
+
   
         // Pour chaque message, récupérez les réponses associées
         this.messages.forEach(message => {
@@ -116,6 +177,8 @@ export class ForumMessageComponent implements OnInit {
       (message: any) => {
         if (message && message.reponses) {
           this.reponses = message.reponses;
+          console.log(this.reponses);
+
         }
       },
       (error) => {

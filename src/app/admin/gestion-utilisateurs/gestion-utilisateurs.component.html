@@ -1,12 +1,12 @@
 <div class="  search-section">
-    <!-- <button class="search-button">
+  <!-- <button class="search-button">
       Ajouter un domaine d'activité 
     </button> -->
-    <div class="search-input shadow">
-      <input type="text" placeholder="Recherche ici">
-      <i class="bx bx-search"></i>
-    </div>
+  <div class="search-input shadow">
+    <input type="text" placeholder="Recherche ici">
+    <i class="bx bx-search"></i>
   </div>
+</div>
 <div class="mt-4 text-center">
   <h3 class="fw-bold">Liste des utilisateurs </h3>
 
@@ -14,6 +14,14 @@
 
 
 <div class=" container table-responsive mt-5">
+
+  <!-- pour basculer entre les utilisateurs et les utilisateurs bloqué -->
+  <select class="form-select mb-3" (change)="changeUserList($event)">
+    <option value="users">Utilisateurs</option>
+    <option value="blockedUsers">Utilisateurs bloqués</option>
+  </select>
+
+
   <table class="table">
     <thead class=" ">
       <tr class="">
@@ -24,11 +32,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of getArticlesPage()">
         <td>{{ user.firstname }}</td>
         <td>{{ user.lastname }}</td>
         <td>{{ user.email }}</td>
-        <td><button class="btn">Bloqué</button></td>
+        <td>
+          <button class="action-button btn1" (click)="deleteuser(user.id)">Supprimer</button> &nbsp;
+          <!-- <button class="btn" >Bloqué</button></td> -->
+
+          <!-- bloquer -->
+          <button class="btn" (click)="toggleBloquerUtilisateur(user)" *ngIf="user.is_blocked == 0">
+            bloquer
+          </button>
+
+          <!-- debloquer -->
+          <button class="btn" (click)="toggleDebloquerUtilisateur(user)" *ngIf="user.is_blocked == 1">
+            débloquer
+          </button>
+
       </tr>
 
       <!-- <tr>
@@ -40,3 +61,19 @@
     </tbody>
   </table>
 </div>
+
+<!-- pagination -->
+<div class="d-flex flex-wrap justify-content-center my-5">
+  <button class="btn_pagination pagiColor me-2" [disabled]="pageActuelle === 1"
+    (click)="pageActuelle = pageActuelle - 1">
+    Précédent
+  </button>
+  <button class="btn_pagination pagiColor_num  ms-2 " *ngFor="let page of pages" (click)="pageActuelle = page">
+    {{ page }}
+  </button>
+  <button class="btn_pagination pagiColor  ms-2 " [disabled]="pageActuelle === totalPages"
+    (click)="pageActuelle = pageActuelle + 1">
+    Suivant
+  </button>
+</div>
+<!-- fin pagination -->

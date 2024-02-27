@@ -17,10 +17,30 @@ export class SidebarAdminComponent implements OnInit {
     
     ) { }
 
+    isSidebarActive = false;
+
+    toggleSidebar() {
+      this.isSidebarActive = !this.isSidebarActive;
+    }
+  
+
   ngOnInit(): void {
     const script = document.createElement('script');
     script.src = '../../../assets/js/script.js';
     document.body.appendChild(script);
+
+    const sidebar = document.querySelector(".sidebar") as HTMLElement;
+    const sidebarBtn = document.querySelector(".sidebarBtn") as HTMLElement;
+
+sidebarBtn.onclick = function () {
+  sidebar.classList.toggle("active");
+  if (sidebar.classList.contains("active")) {
+    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+};
+
   }
 
 

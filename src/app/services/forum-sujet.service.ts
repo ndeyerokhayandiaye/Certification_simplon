@@ -10,7 +10,7 @@ import { Sujet } from '../models/Sujet';
 export class ForumSujetService {
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAllSujets() {
     return this.http.get(`${baseUrl}/displaytopic`);

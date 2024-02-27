@@ -1,12 +1,16 @@
-<div class="  search-section ">
-  <button class="search-button" data-bs-toggle="modal" data-bs-target="#domaine">
+<div class="  search-section first-section ">
+  <button class="search-button " data-bs-toggle="modal" data-bs-target="#domaine">
     Ajouter un domaine d'activité
   </button>
+
+
   <div class="search-input shadow">
-    <input type="text" placeholder="Recherche ici">
+    <input type="text" placeholder="Domaine..." >
     <i class="bx bx-search"></i>
   </div>
+
 </div>
+
 <div class="mt-4 text-center">
   <h3 class="fw-bold">Liste des domaines d'activités</h3>
 </div>
@@ -22,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let domaine of listeDomaines">
+      <tr *ngFor="let domaine of getArticlesPage()">
         <td> <img alt="Image du domaine" src="http://127.0.0.1:8000/pictures/field/{{ domaine.picture }}" /> </td>
         <td>{{ domaine.fieldname }}</td>
         <td>{{ domaine.description }}</td>
@@ -35,6 +39,22 @@
     </tbody>
   </table>
 </div>
+
+
+   <!-- pagination -->
+   <div class="d-flex flex-wrap justify-content-center my-5" >
+    <button class="btn_pagination pagiColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+      Précédent
+    </button>
+    <button class="btn_pagination pagiColor_num  ms-2 " *ngFor="let page of pages" (click)="pageActuelle = page">
+      {{ page }}
+    </button>
+    <button class="btn_pagination pagiColor  ms-2 " [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+      Suivant
+    </button>
+  </div>
+  <!-- fin pagination -->
+  
 <!-- [src]="domaine.picture" -->
 
 <div class="modal fade" id="updateDomaine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -75,7 +95,7 @@
 </div>
 
 
-<div class="modal fade" id="domaine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade  " id="domaine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

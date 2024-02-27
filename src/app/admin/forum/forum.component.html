@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let forum of forums">
+      <tr *ngFor="let forum of getArticlesPage()">
         <td>{{ forum.forumname }}</td>
         <td>{{ forum.description }}</td>
         <td>
@@ -32,6 +32,9 @@
     </tbody>
   </table>
 </div>
+
+
+ 
 
 
 
@@ -103,3 +106,18 @@
     </div>
   </div>
 </div>
+
+
+  <!-- pagination -->
+   <div class="d-flex flex-wrap justify-content-center my-5" >
+    <button class="btn_pagination pagiColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+      Précédent
+    </button>
+    <button class="btn_pagination pagiColor_num  ms-2 " *ngFor="let page of pages" (click)="pageActuelle = page">
+      {{ page }}
+    </button>
+    <button class="btn_pagination pagiColor  ms-2 " [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+      Suivant
+    </button>
+  </div>
+  <!-- fin pagination -->

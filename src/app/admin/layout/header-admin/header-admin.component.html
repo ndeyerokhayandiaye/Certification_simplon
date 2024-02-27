@@ -1,14 +1,15 @@
 <section class="home-section">
   <nav class="nav-admin shadow d-flex" style="padding-right: 22px;">
-    <div class="sidebar-button">
+    <div class="sidebar-button"  >
       <i class="bx bx-menu sidebarBtn"></i>
     </div>
-
+    <!-- (click)="sidebar.toggleSidebar()" -->
+    <!-- (click)="sidebarAdminComponent.toggleSidebar()" -->
     <div class="flex-grow-1"></div>
     <div class="icon-notification fs-4 text-end fw-bold" style="margin-right: 11px;">
       <i class="fa-regular fa-bell" style="color: #0a2640;"></i>
     </div>
-    <div class="icon-profile fs-4 text-end fw-bold">
+    <div class="icon-profile fs-4 text-end fw-bold" routerLink="profileAdmin">
       <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40" >
     </div>
 

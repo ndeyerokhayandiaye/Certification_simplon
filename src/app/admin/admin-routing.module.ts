@@ -9,6 +9,7 @@ import { SujetsComponent } from './sujets/sujets.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UtilisateursBloquesComponent } from './utilisateurs-bloques/utilisateurs-bloques.component';
 import { allguardsGuard } from '../guards/allguards.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent, children: [
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'sujets', component: SujetsComponent },
     { path: 'messages', component: MessagesComponent },
     { path: 'utilisateursbloques', component: UtilisateursBloquesComponent },
+    { path: 'profileAdmin', component: ProfileComponent },
 
   ]},
 

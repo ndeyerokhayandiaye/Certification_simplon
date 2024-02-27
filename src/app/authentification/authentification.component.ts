@@ -45,38 +45,69 @@ serviceLoginService: any;
   }
 
 
-login(){
-  if(this.emailCon == "" || this.passwordCon == ""){
-    this.Alert("Champs vides","Veuillez remplir tous les champs","warning");
-  }else{
-    const user={
+// login(){
+//   if(this.emailCon == "" || this.passwordCon == ""){
+//     this.Alert("Champs vides","Veuillez remplir tous les champs","warning");
+//   }else{
+//     const user={
+//       email: this.emailCon,
+//       password: this.passwordCon
+//     }
+//     this.loginService.login(user).subscribe(
+//       response => {
+//         this.Alert("Connexion établie","Vous êtes bien connecté","success");
+//         console.log('Connexion spécifiée', response);
+//         // localStorage.setItem('token', response.authorization.token);
+//         localStorage.setItem('userConnect', JSON.stringify(response));
+//         if(response.user.is_admin==1){
+      
+//           this.route.navigate(['/admin/statistique']);
+          
+//         }
+//         else if(response.user.is_admin==0){
+//           this.route.navigate(['/forumSujet']);
+          
+//         }
+//         else{
+
+//           this.Alert( "Connexion desétablie","Ce compte n'existe pas","error");
+//         }
+
+// })
+//   }}
+
+// pour pouvoir griser le bouton de connexion tant que les champs ne sont pas bien remplis...
+isFieldsEmpty: boolean = true; 
+ ngDoCheck() {
+  this.isFieldsEmpty = this.emailCon === '' || this.passwordCon === '' || !this.exactEmailCon || !this.exactPasswordCon;
+}
+
+login() {
+  if (this.isFieldsEmpty) {
+    this.Alert("Champs vides ou validations échouées", "Veuillez remplir tous les champs correctement", "warning");
+  } else {
+    const user = {
       email: this.emailCon,
       password: this.passwordCon
-    }
+    };
     this.loginService.login(user).subscribe(
       response => {
-        this.Alert("Connexion établie","Vous êtes bien connecté","success");
+        this.Alert("Connexion établie", "Vous êtes bien connecté", "success");
         console.log('Connexion spécifiée', response);
         // localStorage.setItem('token', response.authorization.token);
         localStorage.setItem('userConnect', JSON.stringify(response));
-        if(response.user.is_admin==1){
-      
+        if (response.user.is_admin === 1) {
           this.route.navigate(['/admin/statistique']);
-          
-        }
-        else if(response.user.is_admin==0){
+        } else if (response.user.is_admin === 0) {
           this.route.navigate(['/forumSujet']);
-          
+        } else {
+          this.Alert("Connexion désétablie", "Ce compte n'existe pas", "error");
         }
-        else{
-
-          this.Alert( "Connexion desétablie","Ce compte n'existe pas","error");
-        }
-        // Sauvegarde des informations de connexion dans le localStorage     
-
-})
-  }}
-
+        // Sauvegarde des informations de connexion dans le localStorage
+      }
+    );
+  }
+}
 
   validateNom() {
     
@@ -162,6 +193,107 @@ login(){
     }
   );
   }
+
+  // register() {
+  //   if (
+  //     this.nom === '' ||
+  //     this.prenom === '' ||
+  //     this.emailCon === '' ||
+  //     this.passwordCon === '' ||
+  //     this.confirmerpassword === ''
+  //   ) {
+  //     this.Alert('Champs vides', 'Veuillez remplir tous les champs', 'warning');
+  //     return;
+  //   }
+
+  //   if (this.nom.length < 2 || !this.nom.match(/^[a-zA-Z\s]*$/)) {
+  //     this.verifNom = 'Le nom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+  //     return;
+  //   }
+
+  //   if (this.prenom.length < 2 || !this.prenom.match(/^[a-zA-Z\s]*$/)) {
+  //     this.verifPrenom = 'Le prénom doit contenir uniquement des lettres et avoir une longueur supérieure ou égale à 2';
+  //     return;
+  //   }
+
+  //   if (this.passwordCon !== this.confirmerpassword) {
+  //     this.Alert('Erreur', 'Les mots de passe ne correspondent pas', 'error');
+  //     return;
+  //   }
+
+  //   const user = {
+  //     nom: this.nom,
+  //     prenom: this.prenom,
+  //     email: this.emailCon,
+  //     password: this.passwordCon,
+  //     is_admin: this.is_admin ? 1 : 0
+  //   };
+
+  //   this.loginService.register(
+  //     this.prenom,
+  //     this.nom,
+  //     this.emailCon,
+  //     this.passwordCon,
+  //     this.confirmerpassword
+  //   ).subscribe(
+  //     response => {
+  //       this.Alert('Inscription réussie', 'Votre compte a été créé avec succès', 'success');
+  //       console.log('Inscription réussie', response);
+  //       this.changeForm = true;
+
+  //          // Réinitialisation des champs du formulaire
+  //     this.nom = '';
+  //     this.prenom = '';
+  //     this.emailCon = '';
+  //     this.passwordCon = '';
+  //     this.confirmerpassword = '';
+  //   },
+     
+      
+  //     error => {
+  //       console.error('Erreur lors de l\'inscription', error);
+  //     }
+  //   );
+  // }
+
+  // isFormValid(): boolean {
+  //   if (
+  //     this.nom === '' ||
+  //     this.prenom === '' ||
+  //     this.emailCon === '' ||
+  //     this.passwordCon === '' ||
+  //     this.confirmerpassword === ''
+  //   ) {
+  //     return false;
+  //   }
+
+
+  //   if (
+  //     this.nom.length < 2 ||
+  //     !this.nom.match(/^[a-zA-Z\s]*$/)
+  //   ) {
+  //     return false;
+  //   }
+
+  //   if (
+  //     this.prenom.length < 2 ||
+  //     !this.prenom.match(/^[a-zA-Z\s]*$/)
+  //   ) {
+  //     return false;
+  //   }
+
+  //   if (this.passwordCon !== this.confirmerpassword) {
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
+
+ 
+  
+
+
 
   private handleError(error: any): void {
     if (error && error.message) {

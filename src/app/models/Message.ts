@@ -1,4 +1,5 @@
 export interface Message {
+  infoUserMessage: any;
   id: number;
   message_content: string;
   topic_id: string;
