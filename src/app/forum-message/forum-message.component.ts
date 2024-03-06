@@ -33,6 +33,8 @@ export class ForumMessageComponent implements OnInit {
   reponseForm: FormGroup;
 
   domaineActifId: number | null = null;
+  messageId: any;
+  message: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -126,48 +128,48 @@ sidebarBtn.onclick = function () {
   }
 
   
-  listMessageBySujet(id: number): void {
-    this.forumSujetService.getSujetByID(id).subscribe(
-      (sujets: any) => {
-        if (sujets && sujets.forum) {
-          this.domain_name = sujets.forum.forumname || '';
-        }
-        this.content = sujets.content;
-        this.date = sujets.created_at;
-        this.messages = sujets.messages;
-        console.log(this.messages);
+  // listMessageBySujet(id: number): void {
+  //   this.forumSujetService.getSujetByID(id).subscribe(
+  //     (sujets: any) => {
+  //       if (sujets && sujets.forum) {
+  //         this.domain_name = sujets.forum.forumname || '';
+  //       }
+  //       this.content = sujets.content;
+  //       this.date = sujets.created_at;
+  //       this.messages = sujets.messages;
+  //       console.log(this.messages);
 
 
-        // Pour chaque signalement, trouvez l'utilisateur et l'annonce concernée
-        this.messages.forEach((message) => {
-          const messageUser = this.users.find(
-            (user) => user.id === message.user_id
-          );
-          // console.log('usersmessages: ', messageUser);
+  //       // Pour chaque signalement, trouvez l'utilisateur et l'annonce concernée
+  //       this.messages.forEach((message) => {
+  //         const messageUser = this.users.find(
+  //           (user) => user.id === message.user_id
+  //         );
+  //         // console.log('usersmessages: ', messageUser);
 
-          message.infoUserMessage = messageUser;
-        });
+  //         message.infoUserMessage = messageUser;
+  //       });
 
 
   
-        // Pour chaque message, récupérez les réponses associées
-        this.messages.forEach(message => {
-          this.forumSujetService.getMessageByID(message.id).subscribe(
-            (response: any) => {
-              message.reponses = response;
-            },
-            (error) => {
-              console.log(error);
-              this.Alert("Erreur", "Erreur lors de la récupération des réponses", "error");
-            }
-          );
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  //       // Pour chaque message, récupérez les réponses associées
+  //       this.messages.forEach(message => {
+  //         this.forumSujetService.getMessageByID(message.id).subscribe(
+  //           (response: any) => {
+  //             message.reponses = response;
+  //           },
+  //           (error) => {
+  //             console.log(error);
+  //             this.Alert("Erreur", "Erreur lors de la récupération des réponses", "error");
+  //           }
+  //         );
+  //       });
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
   
   
   
@@ -177,7 +179,19 @@ sidebarBtn.onclick = function () {
       (message: any) => {
         if (message && message.reponses) {
           this.reponses = message.reponses;
-          console.log(this.reponses);
+          console.log('-------èèè-------',this.reponses);
+
+                  // Pour chaque message, trouvez son utilisateur
+        this.message.reponses.forEach((reponse) => {
+          const reponseUser = this.users.find(
+            (user) => user.id === reponse.user_id
+          );
+          // console.log('usersmessages: ', messageUser);
+
+          reponse.infoUserReponse = reponseUser;
+        });
+
+       
 
         }
       },
@@ -211,14 +225,15 @@ sidebarBtn.onclick = function () {
   ajoutReponse(): void {
     const formData = new FormData();
     formData.append('reply_content', this.reponseForm.value.reply_content);
-    formData.append('message_id', this.domain_id);
+    formData.append('message_id', this.messageId);
     formData.append('user_id', this.userConnect.user.id);
 
     this.domaineService.sendReponse(formData).subscribe(
       () => {
         this.Alert("Succès", "Réponse envoyée avec succès", "success");
         this.listerDomaine();
-        this.listReponseByMessage(this.domain_id);
+        this.listReponseByMessage(this.messageId);
+        this.ngOnInit();
       },
       (error) => {
         this.Alert("Erreur", error.error.message, "error");
@@ -226,6 +241,13 @@ sidebarBtn.onclick = function () {
       }
     );
   }
+
+
+  setMessageId(id){
+    this.messageId=id
+    console.log('----------mdrr',id)
+  }
+
 
   logout(): void {
     this.loginService.logout().subscribe(
@@ -264,4 +286,62 @@ sidebarBtn.onclick = function () {
     this.dislikesCount++;
     localStorage.setItem('dislikesCount', this.dislikesCount.toString());
   }
+
+
+  listMessageBySujet(id: number): void {
+    //...
+    console.log('----------------------------???????',this.messages)
+
+
+    this.forumSujetService.getSujetByID(id).subscribe(
+          (sujets: any) => {
+            if (sujets && sujets.forum) {
+              this.domain_name = sujets.forum.forumname || '';
+            }
+            this.content = sujets.content;
+            this.date = sujets.created_at;
+            this.messages = sujets.messages;
+            console.log(this.messages);
+
+              // Pour chaque message, trouvez son utilisateur
+        this.messages.forEach((message) => {
+          const messageUser = this.users.find(
+            (user) => user.id === message.user_id
+          );
+          // console.log('usersmessages: ', messageUser);
+
+          message.infoUserMessage = messageUser;
+        });
+
+
+
+
+            this.messages.forEach(message => {
+
+              this.forumSujetService.getMessageByID(message.id).subscribe(
+                (response: any) => {
+          console.log('-------èèètfdertuidfd-------',response.reponses);
+          response.reponses.forEach((message) => {
+          const messageUser = this.users.find(
+            (user) => user.id === message.user_id
+          );
+          // console.log('usersmessages: ', messageUser);
+
+          message.infoUserReponse = messageUser;
+        });
+
+                  message.reponses = response.reponses; // Associez les réponses à chaque message
+                },
+                (error) => {
+                  console.log(error);
+                  this.Alert("Erreur", "Erreur lors de la récupération des réponses", "error");
+                }
+              );
+            });
+          console.log('---------------------lol',this.messages)
+
+          });
+    console.log('----------------------------',this.messages)
+  }
+
 }

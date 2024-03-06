@@ -104,6 +104,29 @@
 }
 
 @media screen and (max-width: 700px) {
+  .btn_pagination {
+    color: #0a2640;
+    font-size: 8px;
+  }
+
+  .btn_pagination:hover {
+    color: #0a2640;
+    background-color: #ffc107;
+    font-size: 8px;
+  }
+
+  .pagiColor_num {
+    background-color: #0a2640;
+    /* color: #ffc107; */
+    color: white;
+    /* border: 1.5px solid #FFC107; */
+    /* color: #FFC107; */
+  }
+
+  .nomDomaine {
+    width: auto;
+  }
+
   .nav-admin {
     margin-top: 90% !important;
     background-color: red !important;

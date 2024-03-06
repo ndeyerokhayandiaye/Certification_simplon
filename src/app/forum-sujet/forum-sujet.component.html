@@ -11,19 +11,19 @@
 <body>
   <div class="sidebar">
     <div class="logo-details">
-    <!-- <a href="index.html"><img src="assets/img/logo.png" height="42px" alt="" style="opacity: 0.9;"></a> -->
-    <!-- <i class=""> <a href="index.html"><img src="assets/img/logo.png"  height="42px"style="opacity: 0.9;" alt=""></a></i> -->
-    <i></i>
-      <span  class="logo_name ">pënc</span>
+      <!-- <a href="index.html"><img src="assets/img/logo.png" height="42px" alt="" style="opacity: 0.9;"></a> -->
+      <!-- <i class=""> <a href="index.html"><img src="assets/img/logo.png"  height="42px"style="opacity: 0.9;" alt=""></a></i> -->
+      <i></i>
+      <span class="logo_name ">pënc</span>
     </div>
     <div>
       <h4 class="titreDomaine text-white px-4 mt-4">DOMAINES</h4>
     </div>
-    
+
     <ul class="nav-links">
       <li *ngFor="let domaine of listeDomaines" [routerLinkActive]="['activeMenu']">
-        <a class="fw-bold fs-4" [routerLink]="['/forumSujetSpecific', domaine.id]" 
-           [ngClass]="{'active': isActive(domaine.id)}">
+        <a class="fw-bold fs-4" [routerLink]="['/forumSujetSpecific', domaine.id]"
+          [ngClass]="{'active': isActive(domaine.id)}">
           <i class="bx bx-grid-alt"></i>
           <span class="links_name">{{ domaine.fieldname }}</span>
         </a>
@@ -43,7 +43,8 @@
       <li class="log_out">
         <a (click)=" logout() ">
           <i class="bx bx-log-out"></i>
-          <span class="menuItem" [routerLinkActive]="['activeMenu']" routerLink="accueil" class="links_name">Log out</span>
+          <span class="menuItem" [routerLinkActive]="['activeMenu']" routerLink="accueil" class="links_name">Log
+            out</span>
         </a>
       </li>
     </ul>
@@ -52,7 +53,7 @@
   <section class="home-section">
 
     <nav class="nav-admin shadow d-flex" style="padding-right: 22px;">
-      <div class="sidebar-button"  >
+      <div class="sidebar-button">
         <i class="bx bx-menu sidebarBtn"></i>
       </div>
 
@@ -61,7 +62,8 @@
         <i class="fa-regular fa-bell" style="color: #0a2640;"></i>
       </div>
       <div class="icon-profile fs-4 text-end fw-bold">
-        <img src="https://i.imgur.com/yTFUilP.jpg" routerLink="/profilUser" alt="" class="rounded-circle" width="40" height="40">
+        <img src="https://i.imgur.com/yTFUilP.jpg" routerLink="/profilUser" alt="" class="rounded-circle" width="40"
+          height="40">
 
       </div>
     </nav>
@@ -69,13 +71,14 @@
     <div class="home-content">
 
       <div class="mt-4">
-        <i class="fa-solid fa-arrow-left fs-3 fw-bold w-50 p-4" routerLink="/accueil" style="color: #0a2640; cursor:pointer;"></i>
+        <i class="fa-solid fa-arrow-left fs-3 fw-bold w-50 p-4" routerLink="/accueil"
+          style="color: #0a2640; cursor:pointer;"></i>
 
         <div class="search-section">
           <div class="mt-3">
-            <h2>LISTE DES SUJETS  <span class="span_forum">' FORUM</span> </h2>
+            <h2>LISTE DES SUJETS <span class="span_forum">' FORUM</span> </h2>
           </div>
-<!-- select pour domaines à boucler -->
+          <!-- select pour domaines à boucler -->
           <div class="search-input shadow">
             <div class="select-wrapper">
               <select id="select-option">
@@ -89,7 +92,7 @@
             <!-- <i class="bx bx-search"></i> -->
           </div>
         </div>
-        
+
         <!-- after first section -->
         <div class="mt-2">
           <!-- <p class="para-description fs-5  ">Description du domaine</p> -->
@@ -100,39 +103,40 @@
         </button>
 
 
-       <div class="card mt-4" *ngFor="let sujet of listSujets">
-            <div class="card-content d-flex justify-content-between">
-              <div class="card-description">
-                <p class="fs-4 w-75">{{ sujet.content }}</p>
+        <div class="card mt-4" *ngFor="let sujet of listSujets">
+          <div  style="gap: 1em;" class="card-content d-flex justify-content-between " >
+            <div class="card-description">
+              <p class="fs-4 w-75">{{ sujet.content }}</p>
+            </div>
+
+            <div class="card-buttons mt-4">
+              <button class="card-button btn1">Masquer</button>
+              <button class="card-button btn" routerLink="/forumMessage/{{ sujet.id }}">Voir plus </button>
+            </div>
+
+            <div class="card-details">
+              <div class="card-detail-item">
+                <i class="fa-solid fa-city" style="color: #0A2640;"></i>
+                <span class="fs-6">Domaine: {{ sujet.forum.forumname }} </span>
               </div>
-              <div class="card-buttons mt-4">
-                <button class="card-button btn1">Masquer</button>
-                <button class="card-button btn"  routerLink="/forumMessage/{{ sujet.id }}">Voir plus </button>
-            
+              <div class="card-detail-item orange-color">
+                <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
+                <span class="fs-6">publié le {{ sujet.created_at }} </span>
               </div>
-              <div class="card-details">
-                <div class="card-detail-item">
-                    <i class="fa-solid fa-city" style="color: #0A2640;"></i>
-                  <span class="fs-6">Domaine: {{ sujet.forum.forumname }} </span>
-                </div>
-                <div class="card-detail-item orange-color">
-                    <i class="fa-regular fa-calendar-days" style="color: #FFC107;"></i>
-                    <span class="fs-6">publié le {{ sujet.created_at }} </span>
-                  </div>
-                <div class="card-detail-item">
-                  <!-- <i class="fa-solid fa-message" style="color: #0A2640;"></i> -->
-                  <i class="fa-regular fa-message" style="color: #0A2640;"></i>
-                  <span class="fs-6"> {{ sujet.message_received }}</span>
-                </div>
+              <div class="card-detail-item">
+                <!-- <i class="fa-solid fa-message" style="color: #0A2640;"></i> -->
+                <i class="fa-regular fa-message" style="color: #0A2640;"></i>
+                <span class="fs-6"> {{ sujet.message_received }}</span>
               </div>
             </div>
           </div>
+        </div>
 
       </div>
 
 
 
-   
+
 
 
 

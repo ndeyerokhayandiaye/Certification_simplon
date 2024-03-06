@@ -11,6 +11,7 @@ export interface Message {
 }
 
 export interface Reponse {
+infoUserReponse: any;
   id: number;
   reply_content: string;
   user_id: number;

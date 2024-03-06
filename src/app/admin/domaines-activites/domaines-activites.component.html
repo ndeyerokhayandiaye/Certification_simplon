@@ -4,10 +4,10 @@
   </button>
 
 
-  <div class="search-input shadow">
+  <!-- <div class="search-input shadow">
     <input type="text" placeholder="Domaine..." >
     <i class="bx bx-search"></i>
-  </div>
+  </div> -->
 
 </div>
 
@@ -28,7 +28,7 @@
     <tbody>
       <tr *ngFor="let domaine of getArticlesPage()">
         <td> <img alt="Image du domaine" src="http://127.0.0.1:8000/pictures/field/{{ domaine.picture }}" /> </td>
-        <td>{{ domaine.fieldname }}</td>
+        <td class="nomDomaine">{{ domaine.fieldname }}</td>
         <td>{{ domaine.description }}</td>
         <td>
           <button class="btn" (click)="openEditModal(domaine)" data-bs-toggle="modal"
